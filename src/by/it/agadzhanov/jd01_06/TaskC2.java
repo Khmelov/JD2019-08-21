@@ -1,11 +1,11 @@
 package by.it.agadzhanov.jd01_06;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskC2 {
-    private static int[] indices = new int[0];
 
     public static void main(String[] args) {
         double slowTimeStart = System.currentTimeMillis();
@@ -26,7 +26,7 @@ public class TaskC2 {
     /**
      * Метод, создающий длинную строку из слов из текста через пробел минимум из 100000 медленным способом (String)
      * @param text Исходный текст, из которого будут браться слова
-     * @return Возвращает длинную строку
+     * @return Возвращает длинную строку типа String
      */
     private static String slow(String text) {
         Pattern wordsPattern = Pattern.compile("[а-яА-ЯёЁ]+");
@@ -47,26 +47,27 @@ public class TaskC2 {
             }
 
             // Если встречалось, ничего не делать, если нет - добавить в конец массива
-            if (wordFlag) {
-                break;
-            }
-            else {
+            if (!wordFlag) {
                 words = Arrays.copyOf(words, words.length + 1);
                 words[words.length - 1] = word;
             }
         }
 
-        // Создать длинную строку из случайных слов массива, сохраняя последовательность слов для метода fast
+        // Создать длинную строку из случайных слов массива
         String veryLongString = "";
+        Random wordGenerator = new Random(0);
         while (veryLongString.length() < 100000) {
-            int index = (int) (Math.random() * words.length);
-            indices = Arrays.copyOf(indices, indices.length + 1);
-            indices[indices.length - 1] = index;
+            int index = wordGenerator.nextInt(words.length);
             veryLongString = veryLongString.concat(words[index]).concat(" ");
         }
         return veryLongString;
     }
 
+    /**
+     * Метод, создающий длинную строку из слов из текста через пробел минимум из 100000 быстрым способом (StringBuilder)
+     * @param text Исходный текст, из которого будут браться слова
+     * @return Возвращает длинную строку типа StringBuilder
+     */
     private static String fast(String text) {
         Pattern wordsPattern = Pattern.compile("[а-яА-ЯёЁ]+");
         Matcher wordsMatcher = wordsPattern.matcher(text);
@@ -86,9 +87,7 @@ public class TaskC2 {
             }
 
             // Если встречалось, ничего не делать, если нет - добавить в конец массива
-            if (wordFlag) {
-                break;
-            } else {
+            if (!wordFlag) {
                 words = Arrays.copyOf(words, words.length + 1);
                 words[words.length - 1] = word;
             }
@@ -96,8 +95,10 @@ public class TaskC2 {
 
         // Создать длинную строку из случайных слов массива
         StringBuilder veryLongStringBuilder = new StringBuilder();
-        for (int i = 0; i < indices.length; i++) {
-            veryLongStringBuilder.append(words[indices[i]]).append(" ");
+        Random wordGenerator = new Random(0);
+        while (veryLongStringBuilder.length() < 100000) {
+            int index = wordGenerator.nextInt(words.length);
+            veryLongStringBuilder.append(words[index]).append(" ");
         }
         return  veryLongStringBuilder.toString();
     }

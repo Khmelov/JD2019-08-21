@@ -15,7 +15,7 @@ public class TaskB2 {
             sentences[i] = matcher.replaceAll(" ");
             sentences[i] = sentences[i].trim();
         }
-/*
+
         for (int i = 0; i < sentences.length; i++) {
             for (int j = i + 1; j < sentences.length; j++)
                 if (sentences[i].length() > sentences[j].length()) {
@@ -24,8 +24,7 @@ public class TaskB2 {
                     sentences[j] = temp;
                 }
         }
-*/
-        for (int i = 0; i < sentences.length; i++) {
+       for (int i = 0; i < sentences.length; i++) {
             System.out.println(sentences[i]);
         }
 
