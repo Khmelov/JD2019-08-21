@@ -12,8 +12,8 @@ class InOut {
     static void printArray(double[ ] arr){
         for (double element: arr) {
             System.out.println(element + " ");
-            System.out.println();
         }
+        System.out.println();
 
     }
     static void printArray(double[ ] arr, String name, int columnCount) {

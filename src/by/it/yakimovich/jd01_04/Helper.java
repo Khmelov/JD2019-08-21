@@ -18,16 +18,15 @@ package by.it.yakimovich.jd01_04;
         return max;
     }
      static void sort(double[ ] arr){
-        double m[]={};
         boolean swap;
-        double last=m.length-1;
+        double last=arr.length-1;
         do {
             swap=false;
             for (int i = 0; i <last; i++) {
-                if (m[i] > m[i+1]) {
-                    int buffer= (int) m[i];
-                    m[i]=m[i+1];
-                    m[i+1]=buffer;
+                if (arr[i] > arr[i+1]) {
+                    int buffer= (int) arr[i];
+                    arr[i]=arr[i+1];
+                    arr[i+1]=buffer;
                     swap=true;
                 }
 
