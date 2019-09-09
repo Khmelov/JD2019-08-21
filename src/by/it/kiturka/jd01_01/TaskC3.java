@@ -1,5 +1,7 @@
 package by.it.kiturka.jd01_01;
 
+import java.util.Scanner;
+
 /*
 Ускорение свободного падения на Земле и Марсе таково:
 Марс   3.86
@@ -31,10 +33,23 @@ package by.it.kiturka.jd01_01;
 */
 class TaskC3 {
 
-    public static void main(String[] args) {
 
+        static double getWeight(int weight) {
+            double mars = 3.86D;
+            double earth = 9.81D;
+            double d = earth / mars;
+            double weightMars1 = (double)weight / d;
+            double weightMars2 = (double)Math.round(weightMars1 * 100.0D) / 100.0D;
+            return weightMars2;
+        }
 
-
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println(getWeight(sc.nextInt()));
+        }
     }
 
-}
+
+
+
+

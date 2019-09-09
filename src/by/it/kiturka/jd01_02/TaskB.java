@@ -83,19 +83,28 @@ public class TaskB {
     }
 
 
-    private static void step3(double a, double b, double c) {
-        double dis = b * b - 4 * a * c;
-        if (dis < 0) System.out.println("корней нет");
-        else if (dis == 0) {
-            double x = -b / (2 * a);
-            System.out.println(x);
+    static void step3(double a, double b, double c) {
+        double diskriminant;
+        double x1;
+        double x2;
+        if (a != 0) {
+            diskriminant = b * b - 4 * a * c;
+            if (diskriminant > 0) {
+                x1 = (-b + (Math.sqrt(diskriminant))) / (2 * a);
+                x2 = (-b - (Math.sqrt(diskriminant))) / (2 * a);
+                System.out.println(x1 + " " + x2);
+            }
+            if (diskriminant == 0) {
+                x1 = -b / (2 * a);
+                x2 = -b / (2 * a);
+                System.out.println(x1 + " " + x2);
+            }
+            if (diskriminant < 0) {
+                System.out.println("корней нет");
+            }
         } else {
-            double x1 = (-b + Math.sqrt(dis) / (2 * a));
-            double x2 = (-b + Math.sqrt(dis) / (2 * a));
-            System.out.println(x1 + " " + x2);
-
+            System.out.println("корней нет");
         }
-
     }
 }
 

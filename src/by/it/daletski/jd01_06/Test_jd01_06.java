@@ -600,7 +600,7 @@ public class Test_jd01_06 {
     }
 
 
-    //проверка вывода
+    //проверка выводачахнет
     private Test_jd01_06 is(String str) {
         assertTrue("ERROR:Ожидается такой вывод:\n<---начало---->\n" + str + "<---конец--->",
                 strOut.toString().equals(str));

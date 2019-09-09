@@ -12,6 +12,7 @@ out
 *.ear
 *.iml
 *.log
+*.ipr
 
 dataTaskA.bin
 dataTaskB.bin

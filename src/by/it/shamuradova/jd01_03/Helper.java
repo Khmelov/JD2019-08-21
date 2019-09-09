@@ -2,8 +2,9 @@ package by.it.shamuradova.jd01_03;
 
 /**
  * A class designed to work with arrays
+ *
  * @author Viktoria Shamuradova
- *  @version 1.3
+ * @version 1.3
  */
 
 public class Helper {
@@ -47,22 +48,23 @@ public class Helper {
         System.out.println();
     }
 
-    static double[ ] mul(double[ ][ ] matrix, double[ ] vector){
-        double [] mul = new double [matrix.length];
-        for(int i = 0; i< matrix.length; i++){
-            for (int j = 0; j < vector.length; j++){
+    static double[] mul(double[][] matrix, double[] vector) {
+        double[] mul = new double[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < vector.length; j++) {
 
-                    mul [i] = mul[i] + matrix[i][j] * vector[j];
+                mul[i] = mul[i] + matrix[i][j] * vector[j];
             }
         }
         return mul;
     }
-    static double [] [] mul (double [][] matrixLeft, double [][] matrixRight){
-        double [][] result = new double [matrixLeft.length][matrixRight[0].length];
-        for (int i =0; i<matrixLeft.length; i++){
-            for (int j=0; j<matrixRight[0].length; j++){
-                for(int k=0; k<matrixRight.length; k++){
-                    result[i][j]= result[i][j] + matrixLeft[i][k]*matrixRight[k][j];
+
+    static double[][] mul(double[][] matrixLeft, double[][] matrixRight) {
+        double[][] result = new double[matrixLeft.length][matrixRight[0].length];
+        for (int i = 0; i < matrixLeft.length; i++) {
+            for (int j = 0; j < matrixRight[0].length; j++) {
+                for (int k = 0; k < matrixRight.length; k++) {
+                    result[i][j] = result[i][j] + matrixLeft[i][k] * matrixRight[k][j];
                 }
             }
         }

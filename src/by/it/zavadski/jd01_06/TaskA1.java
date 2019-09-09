@@ -10,7 +10,6 @@ public class TaskA1 {
         Pattern pattern = Pattern.compile("[а-яёА-яЁ]{4,}");
         Matcher matcher = pattern.matcher(text);
 
-
         while (matcher.find()) {
             int start=matcher.start();
             text.setCharAt(start+3,'#');
