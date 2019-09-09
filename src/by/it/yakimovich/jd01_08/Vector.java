@@ -60,6 +60,19 @@ public class Vector extends Var {
 
     @Override
     public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            double[] res = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < res.length; i++)
+                res[i] = this.value[i] - ((Scalar) other).getValue();
+                return new Vector(res);
+        }
+        if (other instanceof Vector) {
+             double[] res=Arrays.copyOf(value, value.length);
+             for (int i = 0; i < this.value.length; i++)
+                 res[i]=this.value[i] - ((Vector)other).value[i];
+                 return new Vector(res);
+         }
+
         return super.sub(other);
     }
 
@@ -73,17 +86,24 @@ public class Vector extends Var {
             return new Vector(res);
         }
         else if (other instanceof Vector) {
-            double[] res=Arrays.copyOf(value, value.length );
-            for (int i = 0; i < res.length; i++) {
-                res[i]=res[i] * ((Vector)other).value[i];
+            double skalar=0;
+            for (int i = 0; i < this.value.length; i++) {
+                skalar+=this.value[i] * ((Vector)other).value[i];
             }
-            return new Vector(res);
+            return new Scalar(skalar);
         }
         return super.mul(other);
     }
 
     @Override
     public Var div(Var other) {
-        return super.div(other);
+        if (other instanceof Scalar){
+            double[] res= Arrays.copyOf(value, value.length);
+            for (int i = 0; i < res.length; i++) {
+                res[i]= this.value[i] / ((Scalar) other).getValue();
+            }
+            return new Vector(res);
+        }
+        return null;
     }
 }
