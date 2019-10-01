@@ -8,8 +8,8 @@ import static java.lang.Math.*;
 
 public class TaskC {
     public static void main(String[] args) {
-        taskC1();
-//        taskC2();
+//        taskC1();
+        taskC2();
     }
 
     private static void taskC1() {
@@ -25,7 +25,7 @@ public class TaskC {
             x += deltaX;
             if (z > 3.5) {
                 tempArray[j] = array1[i];
-                j ++;
+                j++;
             }
         }
         InOut.printArray(array1, "A", 5);
@@ -45,24 +45,65 @@ public class TaskC {
     }
 
     private static void taskC2() {
-        int[] array1 = new int[31];
+        // create arrays
+        int[] arrayA = new int[31];
         int[] tempArray = new int[31];
-        int j = 0;
+        int counter = 0;
         for (int i = 0; i < 31; i++) {
-            array1[i] = (int) (103 + Math.random() * ((450 - 103) + 1));
-            if ((0.1 * array1[i]) > i) {
-                tempArray[j] = array1[i];
-                System.out.println(i + " " + array1[i] + " OK");
-                j++;
-            } else {
-                System.out.println(i + " " + array1[i]);
+            arrayA[i] = (int) (103 + Math.random() * (450 - 103 + 1));
+            if ((0.1 * arrayA[i]) > i) {
+                tempArray[counter] = arrayA[i];
+                counter++;
             }
         }
-        int[] array2 = new int[j];
-        System.arraycopy(tempArray, 0, array2, 0, j);
-        Arrays.sort(array2);
+        int[] arrayB = new int[counter];
+        System.arraycopy(tempArray, 0, arrayB, 0, counter);
+        Arrays.sort(arrayB);
 
-        // to do: print out
+        //find dimensions for print
+        int[] dimensionsA = findDimensions(arrayA);  // dimensions[0] = rows, dimensions[1] = columns
+        int[] dimensionsB = findDimensions(arrayB);
 
+        // print array A
+//        for (int i = 0; i < arrayA.length; i++) {
+//            int number = i+1;
+//            System.out.printf("A[%2d]=%-5d", number, arrayA[i]);
+//            if (number % dimensionsA[1] == 0) {
+//                System.out.println();
+//            }
+//        }
+
+        // array B - rows to columns
+        int rows = dimensionsB[0];
+        int columns = dimensionsB[1];
+        int[][] reversedArrayB = new int[dimensionsB[0]][dimensionsB[1]];
+        int k = 0;
+        for (int j = 0; j < columns; j++) {
+            for (int i = 0; i < rows; i++) {
+                while (k < arrayB.length - 1) {
+                        reversedArrayB[i][j] = arrayB[k];
+//                    System.out.printf("B[%2d]=%-5d", k+1, arrayB[k]);
+                    k++;
+                }
+            }
+        }
+
+        //print reversed array B
+    }
+
+    private static int[] findDimensions(int[] array) {
+        int minRows = Integer.MAX_VALUE;
+        int columns = 0;
+        for (int i = 1; i <= 5; i++) {
+            int rowsCount = array.length / i;
+            if (array.length % i > 0) {
+                rowsCount = rowsCount + 1;
+            }
+            if (rowsCount < minRows) {
+                minRows = rowsCount;
+                columns = i;
+            }
+        }
+        return new int[]{minRows, columns};
     }
 }
