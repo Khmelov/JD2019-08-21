@@ -16,10 +16,28 @@ public class Cashier implements Runnable {
             Buyer buyer = QueueBuyers.extract() ;
             if (buyer != null)
             {System.out.println(this + " начал обслуживать " + buyer);
+
             int timeout = Rnd.fromTo(2000 , 5000) ;
             Thread.sleep(timeout);
+
+            StringBuilder myString = new StringBuilder();
+                myString.append("Чек ").append(buyer).append(":\n");
+                String delimeter = "";
+                for ( String good : buyer.getMySet()) {
+                    myString.append(delimeter) ;
+                    myString.append(good);
+                    myString.append("-----");
+                    myString.append(Market.listOfGoods.get(good)) ;
+                    delimeter = "\n" ;
+                }
+                myString.append("\nсумма покупки = ").append(buyer.getSum()).append("рублей.");
+
+                System.out.println(myString);
+
             System.out.println(this + " обслужил " + buyer);
-            synchronized (buyer) {buyer.notify();}}
+            synchronized (buyer) {
+                buyer.setIWait(false);
+                buyer.notifyAll();}}
             if (buyer == null) {Thread.sleep(10);}
 
         }

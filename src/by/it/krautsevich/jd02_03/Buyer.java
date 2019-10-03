@@ -1,11 +1,27 @@
 package by.it.krautsevich.jd02_03;
 
 import java.util.*;
+import java.util.concurrent.Semaphore;
 
 class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
 
     private int sum ;
     private List<String> mySet ;
+    private boolean iWait = false ;
+
+    private static Semaphore semaphore = new Semaphore(20) ;
+
+    public void setIWait(boolean iWait) {
+        this.iWait = iWait;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public List<String> getMySet() {
+        return mySet;
+    }
 
     Buyer () {
         super("Покупатель № " + Dispatcher.buyerInMarket() + " ");
@@ -16,12 +32,22 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
 
     @Override
     public  void run() {
-        enterToMarket();
-        takeBasket();
-        putGoodsToBasket();
-        chooseGoods();
-        goToQueue();
-        goToOut();
+        try {
+            semaphore.acquire();
+            enterToMarket();
+            takeBasket();
+            putGoodsToBasket();
+            chooseGoods();
+            goToQueue();
+            goToOut();
+        }
+        catch (InterruptedException e) {
+            System.out.println(this +" не может попасть вмагазин.");
+        }
+        finally {
+            semaphore.release();
+        }
+
     }
 
     @Override
@@ -42,8 +68,10 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
     public void goToQueue() {
         System.out.println(this + "встал в очередь.");
         QueueBuyers.add(this);
+        iWait= true ;
         synchronized (this)
         {try {
+            while (iWait)
             this.wait();
         } catch (InterruptedException e)
         {
@@ -80,49 +108,6 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
         int pause = Rnd.fromTo(100 , 200);
         Thread.sleep(pause);
         int numberOfGoods = Rnd.fromTo(1, 4);                  // начинаем выбирать товары
-
- /*       HashMap <String, Integer> listOfGoods = new HashMap<>() ;
-        listOfGoods.put("Хлеб" , 5) ;
-        listOfGoods.put("Картошка" , 3) ;
-        listOfGoods.put("Селедка" , 10) ;
-        listOfGoods.put("Мясо" , 15) ;
-        listOfGoods.put("Макароны", 4);
-        listOfGoods.put("Консервы", 8);
-        listOfGoods.put("Курица", 9);
-        listOfGoods.put("Батон", 5);
-        listOfGoods.put("Водка" , 12) ;
-        listOfGoods.put("Пиво" , 5) ;
-        listOfGoods.put("Морковь", 3);
-        listOfGoods.put("Лук", 2);
-        listOfGoods.put("Мука", 6);
-        listOfGoods.put("Мороженное", 6);
-        listOfGoods.put("Шоколад", 6); */
-
- /*     Set<Map.Entry<String, Integer>> entry_set = Market.listOfGoods.entrySet();
-        Iterator<Map.Entry<String, Integer>> it = entry_set.iterator() ;
-
-       for (int i = 0; i < numberOfGoods & (it.hasNext()) ; )    // этот вариант работает , но корзины получаются одинаковые
-         {
-                Map.Entry<String, Integer> me = it.next() ;
-                sum = sum + me.getValue() ;
-                mySet.add(me.getKey()) ;
-                i++ ;
-         }   */
-
-/*        int i = 0 ;                                              // этот вариант работает, но комп подвисает
-        while (i < numberOfGoods) {
-            if (!it.hasNext()) {entry_set = Market.listOfGoods.entrySet();}
-
-            else
-            for (; i < numberOfGoods & (it.hasNext()) ; ) {
-                Map.Entry<String, Integer> me = it.next() ;
-                int myTry = Rnd.fromTo(0 , 1);
-                if (myTry !=0) {sum = sum + me.getValue() ;
-                            mySet.add(me.getKey()) ;
-                            i++ ;}
-                else {it.next() ;}
-            }
-        } */
 
         Set<Integer> numberOfNeededList = new HashSet<>() ;
         while (numberOfNeededList.size()!= numberOfGoods )

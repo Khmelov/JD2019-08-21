@@ -50,7 +50,7 @@ public class Market {
        }
        for (Thread element : queue) {element.join();}
         poolForCashiers.shutdown();
-       while (poolForCashiers.isShutdown()) {Thread.sleep(10);}
+       while (!poolForCashiers.isTerminated()) {Thread.yield();}
         System.out.println("Магазин закрылся. SORRY, WE ARE CLOSED!!! ");
     }
 }

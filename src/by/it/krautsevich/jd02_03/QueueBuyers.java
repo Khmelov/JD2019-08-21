@@ -1,15 +1,21 @@
 package by.it.krautsevich.jd02_03;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class QueueBuyers {
 
-    private static Deque<Buyer> deque = new LinkedList<>();
+    private static BlockingDeque<Buyer> deque = new LinkedBlockingDeque<>(20);
 
-    static synchronized void add(Buyer buyer) {deque.addLast(buyer);}
+    static void add(Buyer buyer) {
+        try {
+            deque.putLast(buyer);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-    static synchronized Buyer extract() {
+    static Buyer extract() {
         return deque.pollFirst() ;
     }
 }

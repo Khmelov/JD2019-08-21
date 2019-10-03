@@ -1,31 +1,30 @@
 package by.it.krautsevich.jd02_03;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Dispatcher {
 
     private static final int MAX_BUYERS =  100;
-    private static volatile int buyerCounter = 0 ;
-    private static volatile int buyersInMarket = 0 ;
-    private static final Object monitor = new Object() ;
+    private static final AtomicInteger buyerCounter = new AtomicInteger(0) ;
+    private static final AtomicInteger buyersInMarket = new AtomicInteger(0) ;
+
 
     static boolean marketIsOpened () {
-        synchronized (monitor) {
-        return ((!planComplete()) || (buyersInMarket!=0));}
+        return ((!planComplete()) || (buyersInMarket.get()!=0));
     }
 
     static int buyerInMarket () {
-        synchronized (monitor) {
-        buyerCounter++ ;
-        buyersInMarket++ ;
-        return buyerCounter ;}
+
+        buyerCounter.getAndIncrement() ;
+        buyersInMarket.getAndIncrement() ;
+        return buyerCounter.get() ;
     }
 
     static void buyerLeaveMarket () {
-        synchronized (monitor) {
-        buyersInMarket-- ;}
+        buyersInMarket.getAndDecrement() ;
     }
 
     static boolean planComplete () {
-        synchronized (monitor) {
-        return buyerCounter == MAX_BUYERS ;}
+        return buyerCounter.get() == MAX_BUYERS ;
     }
 }
