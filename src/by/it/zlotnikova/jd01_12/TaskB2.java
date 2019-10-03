@@ -8,11 +8,6 @@ public class TaskB2 {
         String[] round = {"One", "Two", "Three", "Four", "Five", "Six",
                 "Seven", "Eight", "Nine", "Ten"};
         ArrayList<String> arrPeoples = new ArrayList<>(Arrays.asList(round));
-//
-//        Random rnd = new Random();
-//        for (int i = 0; i < 10; i++) {
-//            arrPeoples.add(String.valueOf(rnd.nextInt(10) + 1));
-//        }
         LinkedList<String> linkPeoples = new LinkedList<>(arrPeoples);
 
         System.out.println(arrPeoples);

@@ -5,7 +5,6 @@ import java.util.*;
 public class TaskC1 {
     public static void main(String[] args) {
         String text = getText();  //gets text from console
-//        System.out.println("Исходный текст: \n" + text);
         Map<Long, String> map = getTreeMap(text);
         System.out.println("Map с дубликатами значений: " + map.toString());
         Map<Long, String> newMap = removeDuplicates(map);

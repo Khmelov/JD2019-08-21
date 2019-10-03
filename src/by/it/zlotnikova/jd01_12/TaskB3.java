@@ -14,21 +14,18 @@ public class TaskB3 {
         LinkedList<String> linkPeoples = new LinkedList<>(arrPeoples);
         LinkedList<String> linkPeoples2 = new LinkedList<>(arrPeoples);
 
-//        System.out.println(arrPeoples);
         long initTime1 = System.currentTimeMillis();
         String name1 = process(arrPeoples);
         long time1 = System.currentTimeMillis() - initTime1;
         System.out.println("Time for ArrayList - " + time1 + "ms");
         System.out.println(name1);
 
-//        System.out.println(linkPeoples);
         long initTime2 = System.currentTimeMillis();
         String name2 = process(linkPeoples);
         long time2 = System.currentTimeMillis() - initTime2;
         System.out.println("Time for LinkedList - " + time2 + "ms");
         System.out.println(name2);
 
-//        System.out.println(linkPeoples2);
         long initTime3 = System.currentTimeMillis();
         String name3 = processOther(linkPeoples2);
         long time3 = System.currentTimeMillis() - initTime3;

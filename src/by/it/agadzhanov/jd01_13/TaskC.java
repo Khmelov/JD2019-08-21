@@ -1,46 +1,35 @@
 package by.it.agadzhanov.jd01_13;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class TaskC {
 
     private static Scanner scanner;
+    private static int exceptionCount;
+    private static List<Double> numberList;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         scanner = new Scanner(System.in);
-        readData();
+        exceptionCount = 0;
+        numberList = new ArrayList<>();
+        for (; ; ) {
+            readData();
+        }
     }
 
     private static void readData() throws Exception {
-        double[] numbers = new double[0];
-        String line;
-        double number;
-        int exceptionCount = 0;
-        while (scanner.hasNextLine()) {
-            try {
-                line = scanner.nextLine();
-                number = Double.parseDouble(line);
-                numbers = Arrays.copyOf(numbers, numbers.length + 1);
-                numbers[numbers.length - 1] =(int) number;
-            } catch (Exception e) {
-                exceptionCount++;
-                if (exceptionCount == 5)
-                    throw e;
-                Thread.sleep(100);
-                double[] reversedNumbers = reverseArray(numbers);
-                for (double reversedNumber : reversedNumbers) {
-                    System.out.print(reversedNumber + " ");
-                }
+        try {
+            numberList.add(scanner.nextDouble());
+        } catch (Exception e) {
+            Thread.sleep(100);
+            exceptionCount++;
+            if (exceptionCount > 5)
+                throw e;
+            scanner.nextLine();
+            for (int i = numberList.size() - 1; i >= 0; i--) {
+                System.out.print(numberList.get(i) + " ");
             }
+            System.out.println("Исключение №" + exceptionCount);
         }
-    }
-
-    private static double[] reverseArray(double[] numbers) {
-        double[] reversedNumbers = new double[numbers.length];
-        for (int i = 0; i < reversedNumbers.length; i++) {
-            reversedNumbers[i] = numbers[numbers.length - 1 - i];
-        }
-        return reversedNumbers;
     }
 }
