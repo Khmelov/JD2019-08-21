@@ -3,13 +3,11 @@ package by.it.krautsevich.jd02_03;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Queue;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Market {
 
-    static private int time = 0 ;
     static public HashMap<String, Integer> listOfGoods = new HashMap<>() ;
 
     public static void main(String[] args) throws InterruptedException {
