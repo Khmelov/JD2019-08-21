@@ -1,23 +1,16 @@
-package by.it.krautsevich.jd02_01;
+package by.it.krautsevich.jd02_02;
 
 import java.util.*;
 
 class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
 
-    private int num ;
     private int sum ;
     private List<String> mySet ;
 
-
-
-    Buyer (int num) {
-        this.num = num ;
-        this.setName("Покупатель № " + num + " ") ;
+    Buyer () {
+        super("Покупатель № " + Dispatcher.buyerInMarket() + " ");
         this.sum = 0 ;
         this.mySet = new ArrayList<>() ;                //сюда сложим названия выбранных товаров
-
-
-
         start();
     }
 
@@ -27,6 +20,7 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
         takeBasket();
         putGoodsToBasket();
         chooseGoods();
+        goToQueue();
         goToOut();
     }
 
@@ -40,7 +34,22 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
 
     @Override
     public void goToOut() {
-        System.out.println(this + "вышел из магазина (<==)");
+        System.out.println(this + " вышел из магазина (<==)");
+        Dispatcher.buyerLeaveMarket();
+    }
+
+    @Override
+    public void goToQueue() {
+        System.out.println(this + "встал в очередь.");
+        QueueBuyers.add(this);
+        synchronized (this)
+        {try {
+            this.wait();
+        } catch (InterruptedException e)
+        {
+            System.out.println(this + " уснул в очереди. ");
+        }}
+        System.out.println(this + " расплатился (покинул очередь).");
     }
 
     @Override
@@ -131,7 +140,7 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
                 }
 
         StringBuilder myString = new StringBuilder();
-        myString.append(this).append(" положил в корзинку: ");
+        myString.append(this).append("положил в корзинку: ");
         String delimeter = "";
         for ( String good : mySet) {
             myString.append(delimeter) ;
