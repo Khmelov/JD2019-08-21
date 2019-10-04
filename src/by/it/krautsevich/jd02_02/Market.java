@@ -6,8 +6,8 @@ import java.util.Queue;
 
 public class Market {
 
-    static private int time = 0 ;
     static public HashMap<String, Integer> listOfGoods = new HashMap<>() ;
+    static Queue <Thread> queue = new ArrayDeque<>(300) ;
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -28,16 +28,22 @@ public class Market {
         listOfGoods.put("Мороженое", 6);
         listOfGoods.put("Шоколад", 6);
 
-        Queue <Thread> queue = new ArrayDeque<>(300) ;
+
         System.out.println("Магазин открылся");
 
-        for (int i = 1; i <= 2; i++) {
-            Cashier cashier = new Cashier(i) ;
-            Thread thread = new Thread(cashier) ;
-            queue.add(thread) ;
-            thread.start();
+ /*       Cashiers_Boss cashiers_boss = new Cashiers_Boss() ;
+        Thread cash_boss = new Thread(cashiers_boss) ;
+        queue.add(cash_boss);
+        cash_boss.start(); */
 
-        }
+        for (int i = 1; i <= 2; i++) {
+           Cashier cashier = new Cashier(1) ;
+           Thread thread = new Thread(cashier) ;
+           queue.add(thread) ;
+           thread.start(); }
+
+
+
        while (!Dispatcher.planComplete()) {
            int count = Rnd.fromTo(0 , 2) ;
            for (int i = 0; (i <= count) && (!Dispatcher.planComplete()) ; i++) {
@@ -46,6 +52,7 @@ public class Market {
            }
            Thread.sleep(1000);
        }
+
        for (Thread element : queue) {element.join();}
         System.out.println("Магазин закрылся. SORRY, WE ARE CLOSED!!! ");
     }

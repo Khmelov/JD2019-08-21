@@ -9,7 +9,8 @@ public class QueueBuyers {
 
     static synchronized void add(Buyer buyer) {deque.addLast(buyer);}
 
-    static synchronized Buyer extract() {
-        return deque.pollFirst() ;
-    }
+    static synchronized Buyer extract() {return deque.pollFirst() ;}
+
+    static synchronized int getSizeOfDeque(){return deque.size();}
+
 }

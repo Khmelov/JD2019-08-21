@@ -7,6 +7,14 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
     private int sum ;
     private List<String> mySet ;
 
+    public int getSum() {
+        return sum;
+    }
+
+    public List<String> getMySet() {
+        return mySet;
+    }
+
     Buyer () {
         super("Покупатель № " + Dispatcher.buyerInMarket() + " ");
         this.sum = 0 ;
