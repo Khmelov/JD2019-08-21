@@ -8,6 +8,7 @@ public class Cashier implements Runnable {
         name = "Кассир №" + number;
     }
 
+    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     @Override
     public void run() {
         Dispatcher.cashierList.add(this);
@@ -26,7 +27,7 @@ public class Cashier implements Runnable {
                 System.out.println("$$$ " + buyer + " купил " + buyer.getBasket());
                 System.out.println(this + " закончил обслуживать " + buyer);
                 synchronized (buyer) {
-                    buyer.notify();
+                    buyer.notifyAll();
                 }
                 /*
                 synchronized (Dispatcher.monitor) {
