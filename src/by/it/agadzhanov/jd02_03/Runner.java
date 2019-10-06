@@ -1,16 +1,21 @@
-package by.it.agadzhanov.jd02_02;
+package by.it.agadzhanov.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Runner {
 
-    private static List<Thread> peopleList = new ArrayList<>();
+    private static List<Thread> buyersList = new ArrayList<>();
 
     public static void main(String[] args) {
         for (int i = 0; i < 500; i++) {
             main1(args);
-            Dispatcher.reset();
+            Dispatcher.resetBuyerCount();
+            Dispatcher.resetCashierCount();
+            Dispatcher.resetTotalRevenue();
+            Dispatcher.resetCashierRevenueMap();
         }
     }
 
@@ -18,12 +23,9 @@ public class Runner {
 
         System.out.println("Магазин открылся");
 
-        for (int i = 1; i <= 2; i++) {
-            Cashier cashier = new Cashier(i);
-            Thread thread = new Thread(cashier);
-            peopleList.add(thread);
-            Dispatcher.cashierList.add(cashier);
-            thread.start();
+        ExecutorService cashierPool = Executors.newFixedThreadPool(5);
+        for (int i = 1; i <= Dispatcher.MAX_CASHIERS; i++) {
+            cashierPool.execute(new Cashier());
         }
 
         //В течение 120 секунд
@@ -35,29 +37,31 @@ public class Runner {
             for (int j = 1; j <= buyersEntered; j++) {
                 if (!Dispatcher.planComplete()) {
                     Buyer buyer = new Buyer();
-                    peopleList.add(buyer);
+                    buyersList.add(buyer);
                     buyer.start();
                 }
             }
 
-            //Dispatcher.setCashierNumber();
-
-            try {
-                Util.sleepAccelerated(1000);
-            } catch (InterruptedException e) {
-                System.out.println("Main: ошибка при вызове sleep()!");
-            }
+            //Подождать одну секунду
+            Util.sleepAccelerated(1000);
         }
 
         //Не закрывать магазин, пока не вышли последние покупатели
         preventFromClosing();
+
+        //Отключить пул кассиров
+        cashierPool.shutdown();
+        while (!cashierPool.isTerminated()) {              //Для чего именно нужен этот блок?
+            Util.sleepAccelerated(1000);
+        }
+
         System.out.println("Магазин закрылся");
     }
 
     private static void preventFromClosing() {
-        for (Thread person : peopleList) {
+        for (Thread buyer : buyersList) {
             try {
-                person.join();
+                buyer.join();
             } catch (InterruptedException e) {
                 System.out.println("Ошибка при попытке приостановить main с помощью метода join()!");
             }

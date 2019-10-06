@@ -1,0 +1,4 @@
+message.welcome=Здравствуйте!
+message.question=Как дела?
+user.firstname=Ольга
+user.lastname=Жуковская
