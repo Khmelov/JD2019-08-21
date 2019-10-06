@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.LoggingPermission;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,7 +39,7 @@ public class Parser {
 
     Var calc(String expression) throws CalcException {
         expression = expression.replaceAll("\\(", "").replaceAll("\\)", "");
-        expression.replace(" ", "");
+        expression=expression.replace(" ", "");
         String[] part = expression.split(Patterns.OPERATION);
         List<String> operands = new ArrayList<>(Arrays.asList(part));
         List<String> operations = new ArrayList<>();
