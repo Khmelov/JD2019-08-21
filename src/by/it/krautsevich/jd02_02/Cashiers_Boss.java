@@ -30,7 +30,8 @@ public class Cashiers_Boss implements Runnable{
                 new_thread.start();
             }
             if ( (neededNumber > numberOfCashiers) && (numberOfCashiers!=1)) {
-                Thread my_cashier = dequeueOfCashiers.pollLast(); }
+                Thread my_cashier = dequeueOfCashiers.pollLast();
+                }
 
             }
         }

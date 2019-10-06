@@ -16,7 +16,7 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         System.out.println(this + " открыл кассу.");
-        while (Dispatcher.marketIsOpened() && (!orderToStop) )
+        while ( Dispatcher.marketIsOpened() && (!orderToStop) )
         {try {
 
             Buyer buyer = QueueBuyers.extract() ;
@@ -40,12 +40,15 @@ public class Cashier implements Runnable {
             System.out.println(this + " обслужил " + buyer);
             synchronized (buyer) {buyer.notify();}}
             if (buyer == null) {Thread.sleep(10);}
-
         }
         catch (InterruptedException e)
         {
             System.out.println("Проблемы у " + this);
         }}
+        if (orderToStop) {
+            System.out.println(this + " досрочно закрыл кассу!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            Thread.interrupted();
+        }
         System.out.println(this + " закрыл кассу.");
     }
 
