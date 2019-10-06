@@ -9,10 +9,22 @@ class Dispatcher {
     private static volatile int buyerInMarket = 0;
     private static final Object monitor = new Object();
 
+    private static volatile double totalMoney = 0;
+
+    static double getTotalMoney() {
+        return totalMoney;
+    }
+
+    static void addMoney(double sum) {
+        synchronized (monitor) {
+            totalMoney += sum;
+        }
+    }
 
 //    static void reset(){
 //        buyerCounter=0;
 //    }
+
 
     static boolean marketIsOpened() {
         synchronized (monitor) {
