@@ -13,6 +13,7 @@ out
 *.iml
 *.log
 *.ipr
+*.iws
 
 dataTaskA.bin
 dataTaskB.bin
