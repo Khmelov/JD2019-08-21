@@ -20,7 +20,16 @@ public enum ResMan {
         res_Boundle=ResourceBundle.getBundle(reference, locale) ;
     }
 
+    void setLocale(String language , String country) {
+        locale = new Locale (language , country) ;
+        setLocale(locale);
+    }
+
     String get(String key) {
         return res_Boundle.getString(key) ;
+    }
+
+    Locale getLocale() {
+        return locale;
     }
 }
