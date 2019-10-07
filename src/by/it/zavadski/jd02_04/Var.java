@@ -1,8 +1,9 @@
 package by.it.zavadski.jd02_04;
 
-import java.io.*;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import by.it.zavadski.jd02_05.ResourceManager;
 
 abstract class Var implements Operation {
 
@@ -21,7 +22,7 @@ abstract class Var implements Operation {
             return new Vector(strVar);
         if(strVar.matches(Patterns.MATRIX))
             return new Matrix(strVar);
-        else if (vars.containsKey(strVar))
+        if (vars.containsKey(strVar))
             return vars.get(strVar);
         throw new CalcException("Невозможно создать "+strVar);
     }
