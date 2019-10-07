@@ -7,14 +7,14 @@ public class Runner {
 
     private static List<Thread> peopleList = new ArrayList<>();
 
-    /*public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
+    public static void main(String[] args) {
+        for (int i = 0; i < 500; i++) {
             main1(args);
             Dispatcher.reset();
         }
-    }*/
+    }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
 
         System.out.println("Магазин открылся");
 

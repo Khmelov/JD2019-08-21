@@ -1,0 +1,8 @@
+message.error= ПАМЫЛКА:
+message.writerCalcException= не запiсаны файл
+message.var= гэта клас Var
+message.varAdd= аперацыя дапаўнення немагчыма
+message.varSub= аперацыя аднімання немагчыма
+message.varMul= аперацыя множання немагчыма
+message.varDiv= аперацыя дзялення немагчыма
+message.enter= увядзіце выраз
