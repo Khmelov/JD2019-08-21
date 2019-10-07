@@ -1,0 +1,8 @@
+message.error= ОШИБКА:
+message.writerCalcException= файл не записан
+message.var= это класс Var
+message.varAdd= операция сложения невозможна
+message.varSub= операция вычитания невозможна
+message.varMul= операция умножения невозможна
+message.varDiv= операция деления невозможна
+message.enter= введите выражение
