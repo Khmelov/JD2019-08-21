@@ -3,7 +3,7 @@ package by.it.yuntsevich.calc;
 import java.util.Arrays;
 
 public class Vector extends Var {
-    private double[] value;
+     private double[] value;
 
     public double[] getValue() {
         return value;
@@ -13,9 +13,9 @@ public class Vector extends Var {
         this.value = Arrays.copyOf(value, value.length);
     }
 
-    Vector(Vector vector) {
-        this.value = Arrays.copyOf(vector.value, vector.value.length);
-    }
+    //Vector(Vector vector) {
+//        this.value = Arrays.copyOf(vector.value, vector.value.length);
+//    }
 
     Vector(String strVector) {
         strVector = strVector.replaceAll("\\{", "").replaceAll("}", "");

@@ -3,15 +3,15 @@ package by.it.yuntsevich.calc;
 import java.util.Arrays;
 
 public class Matrix extends Var {
-    private double[][] value;
+     private double[][] value;
 
-    private Matrix(double[][] value){
+     private Matrix(double[][] value){
         this.value = Arrays.copyOf(value,value.length);
     }
 
-    Matrix (Matrix matrix){
-        this.value = Arrays.copyOf(matrix.value,matrix.value.length);
-    }
+//    Matrix (Matrix matrix){
+//        this.value = Arrays.copyOf(matrix.value,matrix.value.length);
+//    }
 
     Matrix(String strMatrix){
         char [] a = strMatrix.toCharArray();

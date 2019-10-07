@@ -31,7 +31,7 @@ public class Scalar extends Var {
 
 
     @Override
-    public Var add (Var other){ //сложение Scalar на Scalar
+    public Var add (Var other) throws CalcException{ //сложение Scalar на Scalar
         if (other instanceof Scalar){
             double summaScalar = this.value + ((Scalar) other).value;
             return new Scalar(summaScalar);
@@ -42,7 +42,7 @@ public class Scalar extends Var {
         }
     }
     @Override
-    public Var sub (Var other){
+    public Var sub (Var other)throws CalcException{
         if (other instanceof Scalar){
             double vichitanieScalar = this.value - ((Scalar) other).value;
             return new Scalar(vichitanieScalar);
@@ -54,7 +54,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var mul (Var other){
+    public Var mul (Var other)throws CalcException{
         if (other instanceof Scalar){
             double umnogenieScalar = this.value * ((Scalar) other).value;
             return new Scalar(umnogenieScalar);
@@ -65,7 +65,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var div (Var other){
+    public Var div (Var other)throws CalcException{
         if (other instanceof Scalar){
             double delenieScalar = this.value / ((Scalar) other).value;
             return new Scalar(delenieScalar);

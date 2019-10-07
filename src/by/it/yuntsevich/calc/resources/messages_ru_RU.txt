@@ -1,0 +1,6 @@
+message.operation= неизвестная операция:
+message.division= деление на ноль
+message.file= не записано в файл:
+message.creation= невозможно создать:
+message.operationimpossible= операция невозможна:
+message.error= ОШИБКА:
