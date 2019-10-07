@@ -6,6 +6,8 @@ import java.util.Map;
 
 public abstract class Var implements Operation {
 
+    static ResMan rm = ResMan.INSTANCE;
+
     private static Map<String, Var> vars = new HashMap<>();
 
     static Var saveVar(String name, Var var) {
@@ -20,6 +22,7 @@ public abstract class Var implements Operation {
 
 
     static Var createVar(String strVar) throws CalcException{
+        strVar = strVar.replace(" ", "");
         if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
         if (strVar.matches(Patterns.VECTOR))
@@ -28,7 +31,7 @@ public abstract class Var implements Operation {
             return new Matrix(strVar);
         if (vars.containsKey(strVar))
             return vars.get(strVar);
-        throw new CalcException("Unavailable to create " + strVar);
+        throw new CalcException(rm.get("Var.ErrCannotCreate") + " " + strVar);
     }
 
     @Override
@@ -38,21 +41,21 @@ public abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("Operation " + this + " + " + other + "unavailable\n");
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException("Operation " + this + " - " + other + "unavailable\n");
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 
     @Override
     public Var mul(Var other) throws CalcException{
-        throw new CalcException("Operation " + this + " * " + other + "unavailable\n");
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 
     @Override
     public Var div(Var other) throws CalcException{
-        throw new CalcException("Operation " + this + " / " + other + "unavailable\n");
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 }

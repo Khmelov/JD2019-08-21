@@ -74,7 +74,7 @@ public class Matrix extends Var {
                     result[i][j] = this.value[i][j] + ((Matrix) other).value[i][j];
             return new Matrix(result);
         }
-        throw new CalcException("Unavailable addition for Matrix");
+        throw new CalcException(Var.rm.get("Matrix.ErrCannotAdd"));
     }
 
     @Override
@@ -89,14 +89,14 @@ public class Matrix extends Var {
         if (other instanceof Matrix) {
             double [][] result = new double [this.value.length][this.value.length];
             if (this.value.length != ((Matrix) other).value.length || this.value[0].length != ((Matrix)other).value[0].length ) {
-                throw new CalcException("The size of matrix is not equal");
+                throw new CalcException(Var.rm.get("Matrix.ErrNotEqualSize"));
             }
             for (int i = 0; i < this.value.length; i++)
                 for(int j=0; j< this.value[i].length; j++)
                     result[i][j] = this.value[i][j] - ((Matrix) other).value[i][j];
             return new Matrix(result);
         }
-        throw new CalcException("Unavailable subtraction for Matrix");
+        throw new CalcException(Var.rm.get("Matrix.ErrCannotSubtraction"));
     }
 
     @Override
@@ -123,6 +123,6 @@ public class Matrix extends Var {
                         result[i][j] = result[i][j] + this.value[i][k] * ((Matrix)other).value[k][j];
             return new Matrix(result);
         }
-        throw new CalcException("Unavailable multiplication for Matrix");
+        throw new CalcException(Var.rm.get("Matrix.ErrCannotMultiplication"));
     }
 }

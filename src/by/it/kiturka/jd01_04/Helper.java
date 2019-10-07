@@ -19,51 +19,46 @@ public class Helper {
         return max;
     }
 
+    static void sort(double[] arr) {
+        double save;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    save = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = save;
+                }
 
-   /* static double sort(double[] arr) {
+            }
+        }
+        for (double m : arr) {
+            System.out.print(m + " ");
+        }
+    }
 
+    static double[] mul(double[][] matrix, double[] vector) {
+        double[] mul = new double[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < vector.length; j++) {
 
-        boolean swap;
-        int last = arr.length - 1;
-        do {
-            swap = false;
-            for (int j = 0; j < last; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    double buffer = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = buffer;
-                    swap = true;
+                mul[i] = mul[i] + matrix[i][j] * vector[j];
+            }
+        }
+        return mul;
+    }
+
+    static double[][] mul(double[][] matrixLeft, double[][] matrixRight) {
+        double[][] result = new double[matrixLeft.length][matrixRight[0].length];
+        for (int i = 0; i < matrixLeft.length; i++) {
+            for (int j = 0; j < matrixRight[0].length; j++) {
+                for (int k = 0; k < matrixRight.length; k++) {
+                    result[i][j] = result[i][j] + matrixLeft[i][k] * matrixRight[k][j];
                 }
             }
-            last--;
         }
-        while (swap);
-
-    } */
-
-     static void sort(double [] arr) {
-         double save;
-         for (int i = 0; i < arr.length; i++) {
-             for (int j = i + 1; j < arr.length; j++) {
-                 if (arr[i] > arr[j]) {
-                     save = arr[i];
-                     arr[i] = arr[j];
-                     arr[j] = save;
-                 }
-
-             }
-
-
-         }
-
-
-         for (double m : arr) {
-             System.out.print(m + " ");
-             //System.out.println();
-         }
-     }
-
-
+        return result;
+    }
 }
+
 
 

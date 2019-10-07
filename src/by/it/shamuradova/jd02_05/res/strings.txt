@@ -1,0 +1,4 @@
+messager.welcom=Hi!
+message.quastion=How are you?
+user.name=Victoria
+user.surname=Shamuradova

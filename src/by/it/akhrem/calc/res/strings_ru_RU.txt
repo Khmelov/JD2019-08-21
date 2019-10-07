@@ -1,0 +1,11 @@
+CalcException.Error=Ошибка:
+Matrix.ErrCannotAdd=Недопустимое суммирование для матриц
+Matrix.ErrNotEqualSize=Размер матриц не одинаковый
+Matrix.ErrCannotSubtraction=Недопустимое вычитание для матриц
+Matrix.ErrCannotMultiplication=Недопустимое умножение для матриц
+Parser.ErrUnknownOperation=неизвестная операция:
+Var.ErrCannotCreate=Невозможно создать
+Var.ErrOperation=Операция
+Var.ErrUnavailable=недоступна
+Vector.ErrNotEqualSize=Размер векторов не одинаковый
+Vector.ErrUnavailableOperation=Недопустимая операция для вектора
