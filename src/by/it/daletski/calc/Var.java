@@ -8,7 +8,7 @@ class Var implements Operation {
             return new Scalar (operand);
         if (operand.matches (Patterns.VECTOR))
             return new Vector (operand);
-        throw new CalcException ("Невозможно создать " + operand);
+        throw new CalcException (" Невозможно создать " + operand);
     }
 
     @Override

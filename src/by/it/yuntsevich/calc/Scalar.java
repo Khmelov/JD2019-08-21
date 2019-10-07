@@ -45,16 +45,16 @@ public class Scalar extends Var {
 
         if (other instanceof Scalar) {
             if (((Scalar) other).value ==0)
-                throw new CalcException("Деление на 0");
+                throw new CalcException(ResourceManager.INSTANCE.get(Messages.DIVISION));
             double result = this.value/ ((Scalar) other).value;
             return new Scalar(result);
         }
         return super.div(other);
     }
 
-    Scalar(Scalar otherScalar){
-        this.value = otherScalar.value;
-    }
+//    Scalar(Scalar otherScalar){
+//        this.value = otherScalar.value;
+//    }
     public Scalar(String stringValue){
         this.value = Double.valueOf(stringValue);
     }

@@ -1,0 +1,5 @@
+message.welcome=Привет!
+message.question=Как дела?
+message.suggestion=Введите тип локали(en, ru, be, end-выход):
+user.firstname=Юрий
+user.lastname=Ахрем
