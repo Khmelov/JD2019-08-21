@@ -5,7 +5,7 @@ import java.util.*;
 public class Market {
     static Map<String, Double> goodsList = new HashMap<>(20);
 
-    static Map.Entry<String, Double> getRandomGoods() {
+    public static Map.Entry<String, Double> getRandomGoods() {
         goodsList.putIfAbsent("milk", 1.5);
         goodsList.putIfAbsent("bread", 1.2);
         goodsList.putIfAbsent("salmon", 1.7);

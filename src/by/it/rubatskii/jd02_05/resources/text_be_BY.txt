@@ -1,0 +1,4 @@
+message.welcome=Прывiтанне!
+message.question=Як справы?
+user.name=Святлана
+user.surname=Юнцэвiч
