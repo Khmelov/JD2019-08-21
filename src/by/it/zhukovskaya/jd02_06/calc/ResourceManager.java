@@ -7,7 +7,7 @@ public enum ResourceManager {
 
     INSTANCE;
 
-    private final String baseName = "by.it.agadzhanov.jd02_05_calculator6.res.messages";
+    private final String baseName = "by.it.zhukovskaya.jd02_05_calc.res.messages";
     private ResourceBundle resourceBundle;
     private Locale locale;
 

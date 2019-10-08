@@ -1,52 +1,61 @@
 package by.it.zhukovskaya.jd02_02;
 
-import com.sun.javaws.IconUtil;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 public class Cashier implements Runnable {
+
     private String name;
 
-    public  Cashier(int number) {
-        name = "Cashier " + number;
+    Cashier(int number) {
+        name = "Кассир №" + number;
     }
 
+    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     @Override
     public void run() {
-        while(Dispathcher.marketIsOpened()) {
-            Buyer buyer = QueueBuyers.extract();
+        Dispatcher.cashierList.add(this);
+        System.out.println(this + " начал работу");
+
+        while (Dispatcher.marketIsOpen()) {
+            Buyer buyer = BuyersQueue.callFromQueue();
             if (buyer != null) {
-                System.out.println(this + " start service " + buyer);
-                int timeout = Util.random(2000, 5000);
-                Util.sleep(timeout);
-                System.out.println("the basket of " + buyer + ":");
-                printBasket(buyer.getBasket().entrySet());
-                System.out.println(this + " stop service " + buyer);
-                synchronized (buyer) {
-                    buyer.notify();
+                System.out.println(this + " начал обслуживать " + buyer);
+                int serviceTime = Util.randomFromTo(2000, 5000);
+                try {
+                    Util.sleepAccelerated(serviceTime);
+                } catch (InterruptedException e) {
+                    System.out.println(this + ": ожидание завершено некорректно при вызове run()!");
                 }
+                System.out.println("$$$ " + buyer + " купил " + buyer.getBasket());
+                System.out.println(this + " закончил обслуживать " + buyer);
+                synchronized (buyer) {
+                    buyer.notifyAll();
+                }
+                /*
+                synchronized (Dispatcher.monitor) {
+                    if (Dispatcher.cashiersNeeded < Dispatcher.cashierCount) {
+                        try {
+                            this.wait();
+                        } catch (InterruptedException e) {
+                            System.out.println("Ожидание " + this + " было прервано!");
+                        }
+                    }
+                }
+                */
             } else {
-                Util.sleep(1);//bad solution
+                synchronized (this) {
+                    try {
+                        this.wait(1000 / Dispatcher.timeFactor);
+                    } catch (InterruptedException e) {
+                        System.out.println("Ожидание " + this + " было прервано!");
+                    }
+                }
             }
         }
-    }
 
-    private void  printBasket(Set<Map.Entry<String, Double>> basket) {
-        Iterator<Map.Entry<String, Double>> itrBasket = basket.iterator();
-        double sumPrice = 0;
-        while (itrBasket.hasNext()) {
-            Map.Entry<String, Double> goods = itrBasket.next();
-            System.out.println(goods.getKey()+" - " + goods.getValue());
-            sumPrice += goods.getValue();
-        }
-        System.out.println("Summary priсe: " + Math.round(sumPrice*100)/100.0);
+        System.out.println(this + " закончил работу");
     }
 
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
-
 }
