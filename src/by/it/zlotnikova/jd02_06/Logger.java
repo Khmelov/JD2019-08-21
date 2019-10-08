@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
-public class Logger {
+class Logger {
 
     private String path = PathGenerator.getPath(Logger.class);
     private String filename = "log.txt";
@@ -27,12 +27,13 @@ public class Logger {
         if (loggerLocal == null) {
             synchronized (Logger.class) {
                 loggerLocal = logger;
-                if (loggerLocal == null) ;
-                logger = new Logger();
-                loggerLocal = logger;
+                if (loggerLocal == null) {
+                    logger = new Logger();
+                    loggerLocal = logger;
+                }
             }
         }
-        return logger;
+        return loggerLocal;
     }
 
     private String stringDate = getDate();
@@ -41,7 +42,7 @@ public class Logger {
     synchronized void log(String message) {
         try (PrintWriter printWriter = new PrintWriter(
                 new FileWriter(fullPath, true))) {
-            printWriter.println(stringDate + " "+ stringTime +" LOG: " + message);
+            printWriter.println(stringDate + " " + stringTime + " LOG: " + message);
             printWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();

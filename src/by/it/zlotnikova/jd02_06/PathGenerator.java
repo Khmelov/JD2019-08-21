@@ -2,7 +2,7 @@ package by.it.zlotnikova.jd02_06;
 
 import java.io.File;
 
-public class PathGenerator {
+class PathGenerator {
 
     static String getPath(Class<?> clazz) {
         String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;

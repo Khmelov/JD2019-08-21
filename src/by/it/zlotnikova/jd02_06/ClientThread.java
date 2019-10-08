@@ -2,7 +2,7 @@ package by.it.zlotnikova.jd02_06;
 
 public class ClientThread extends Thread {
 
-    public ClientThread(String name) {
+    ClientThread(String name) {
         this.setName(name);
     }
 
