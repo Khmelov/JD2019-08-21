@@ -10,12 +10,14 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     Map<String, Double> basket = null;
 
-    Buyer(int number) {
-        super("Buyer № " + number);
+    Buyer() {
+        super("Buyer № " + Dispatcher.buyerInMarket());
+
     }
 
     @Override
     public void run() {
+
         this.getName();
         enterToMarket();
         takeBasket();
@@ -43,8 +45,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goToQueue() {
-
-
+        System.out.println(this + " added to Queue");
         QueueBuyers.add(this);
         synchronized (this) {
             try {
@@ -53,7 +54,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
                 e.printStackTrace();
             }
         }
-
+        System.out.println(this + " leave CashDeck");
 
 
     }
@@ -61,6 +62,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goOut() {
         System.out.println(this + " leave to Market");
+        Dispatcher.buyerLeaveMarket();
 
     }
 

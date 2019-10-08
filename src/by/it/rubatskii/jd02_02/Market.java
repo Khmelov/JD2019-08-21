@@ -6,7 +6,7 @@ public class Market {
 
     static Map<String, Double> goodsList = new HashMap<>(15);
 
-    static Map.Entry<String, Double> getRandomGoods () {
+    static Map.Entry<String, Double> getRandomGoods() {
         goodsList.putIfAbsent("Milk", 1.66);
         goodsList.putIfAbsent("Cheese", 9.22);
         goodsList.putIfAbsent("Bread", 1.47);
@@ -20,33 +20,44 @@ public class Market {
         int i = 0;
         while (itr.hasNext()) {
             i++;
-            if (i==number)
-                return  itr.next();
+            if (i == number)
+                return itr.next();
             else itr.next();
         }
         return null;
     }
 
     public static void main(String[] args) throws InterruptedException {
-        int numberBuyer=0;
         System.out.println("Market opened");
-        List<Buyer> buyerList=new ArrayList<>(200);
-        for (int time = 1; time <= 120; time++) {
-            int countBuyer = Util.random(2);
-            for (int i = 0; i < countBuyer; i++) {
-                Buyer buyer = new Buyer(++numberBuyer);
-                buyerList.add(buyer);
-                buyer.start();
+
+
+        List<Thread> actorList = new ArrayList<>(200);
+        for (int i = 1; i <= 2; i++) {
+            Cashier cashier = new Cashier(i);
+            Thread thread = new Thread(cashier);
+            actorList.add(thread);
+            thread.start();
+        }
+        while (!Dispatcher.planComplete()) {
+            for (int time = 1; time <= 120; time++) {
+                int countBuyer = Util.random(2);
+                for (int i = 0; i < countBuyer; i++) {
+                    if (!Dispatcher.planComplete()) {
+                        Buyer buyer = new Buyer();
+                        actorList.add(buyer);
+                        buyer.start();
+                    }
+                    Util.sleep(1000);
+                }
+                for (Thread actor : actorList) {
+                    actor.join();
+                }
+
+                }
+
+                System.out.println("Market closed");
             }
-            Util.sleep(1000);
-        }
-        for (Buyer buyer : buyerList) {
-            buyer.join();
 
         }
-
-        System.out.println("Market closed");
     }
 
-
-}
