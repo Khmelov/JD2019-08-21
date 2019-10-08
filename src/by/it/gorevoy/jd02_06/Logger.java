@@ -9,7 +9,7 @@ import java.util.Date;
 
 class Logger {
 
-    private static volatile Logger instance;
+    private static Logger instance;
 
     private Logger() {
     }
@@ -18,19 +18,13 @@ class Logger {
         Logger localInstance = instance;
         //Проверка для скорости
         if (localInstance == null) {
-            synchronized (Logger.class) {
-                localInstance = instance;
-                //Проверка для надёжности (вдруг instance создался другим потоком во время создания synchronized блока)
-                if (localInstance == null) {
-                    localInstance = new Logger();
-                    instance = localInstance;
-                }
-            }
+            localInstance = new Logger();
+            instance = localInstance;
         }
         return localInstance;
     }
 
-    synchronized void printErrorInfo(String message) {
+    void printErrorInfo(String message) {
         try (PrintWriter printWriter = new PrintWriter(
                 new FileWriter(
                         PathGenerator.dir(Logger.class) + "log.txt", true))) {
