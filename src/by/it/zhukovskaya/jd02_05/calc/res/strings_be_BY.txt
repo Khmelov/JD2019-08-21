@@ -1,0 +1,11 @@
+CalcException.Error=Памылка:
+Matrix.ErrCannotAdd=Недапушчальная складанне для матрыцы
+Matrix.ErrNotEqualSize=Размер матрыц не аднолькавы
+Matrix.ErrCannotSubtraction=Недапушчальнае адыманне для матрыцы
+Matrix.ErrCannotMultiplication=Недапушчальнае множанне для матрыцы
+Parser.ErrUnknownOperation=невядомая аперацыя:
+Var.ErrCannotCreate=Немагчыма стварыть
+Var.ErrOperation=Аперацыя
+Var.ErrUnavailable=недаступна
+Vector.ErrNotEqualSize=Размер вектароу не аднолькавы
+Vector.ErrUnavailableOperation=Недапушчальная аперацыя да вектара

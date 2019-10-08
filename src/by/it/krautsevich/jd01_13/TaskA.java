@@ -15,7 +15,7 @@ public class TaskA {
              StackTraceElement [] trace = e.getStackTrace() ;
              for (StackTraceElement element : trace) {
                  String className = element.getClassName() ;
-             if (className.contains("TaskA")) {
+             if (className.contains("I18n")) {
                     String name = e.getClass().getName();
                     int clazzNumber = element.getLineNumber() ;
 

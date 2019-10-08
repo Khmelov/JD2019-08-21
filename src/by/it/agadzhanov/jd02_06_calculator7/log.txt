@@ -1,0 +1,102 @@
+ERROR: Division by zero is not defined!
+08/10/2019 00/48/20
+ERROR: Division by zero is not defined!
+08/10/2019 00/51/05
+ERROR: message.impossibletocreate
+08/10/2019 00/51/10
+ERROR: message.impossibletocreate
+08/10/2019 00/52/28
+ERROR: Сложение невозможно!
+08/10/2019 00/52/41
+ERROR: message.impossibletocreate
+08/10/2019 00/53/36
+ERROR: message.impossibletocreate
+08/10/2019 00/53/39
+ERROR: Дзяленне на нуль немагчыма!
+08/10/2019 00/53/42
+ERROR: message.impossibletocreate
+08/10/2019 00/53/52
+ERROR: Division by zero is not defined!
+08/10/2019 00/54/22
+ERROR: message.impossibletocreate
+08/10/2019 00/54/29
+ERROR: Division by zero is not defined!
+08/10/2019 00/56/14
+ERROR: Стварэнне зменнай з такім імем немагчыма!
+08/10/2019 00/56/19
+ERROR: Деление невозможно!
+08/10/2019 00/56/29
+ERROR: Division by zero is not defined!
+08/10/2019 00/58/24
+ERROR: Стварэнне зменнай з такім імем немагчыма!
+08/10/2019 00/58/27
+ERROR: Деление невозможно!
+08/10/2019 00/58/37
+ERROR: Division by zero is not defined!
+08/10/2019 01/03/24
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/03/32
+ERROR: Деление невозможно!
+08/10/2019 01/04/02
+ERROR: Дзяленне на нуль немагчыма!
+08/10/2019 01/06/01
+ERROR: Деление невозможно!
+08/10/2019 01/06/14
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/06/25
+ERROR: Division by zero is not defined!
+08/10/2019 01/07/54
+ERROR: Деление невозможно!
+08/10/2019 01/08/03
+ERROR: Стварэнне зменнай з такім імем немагчыма!
+08/10/2019 01/08/16
+ERROR: Стварэнне зменнай з такім імем немагчыма!
+08/10/2019 01/08/24
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/12/02
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/12/15
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/14/02
+ERROR: Дзяленне на нуль немагчыма!
+08/10/2019 01/14/11
+ERROR: Деление невозможно!
+08/10/2019 01/14/23
+ERROR: Создание переменной с данным именем невозможно!
+08/10/2019 01/14/29
+ERROR: Деление на 0 невозможно!
+08/10/2019 01/15/52
+ERROR: Стварэнне зменнай з такім імем немагчыма!
+08/10/2019 01/15/56
+ERROR: Division is not defined!
+08/10/2019 01/16/03
+ERROR: Дзяленне на нуль немагчыма!
+08/10/2019 01/16/53
+ERROR: Деление невозможно!
+08/10/2019 01/17/03
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/17/14
+ERROR: Division by zero is not defined!
+08/10/2019 01/20/55
+ERROR: Дзяленне немагчыма!
+08/10/2019 01/21/04
+ERROR: Создание переменной с данным именем невозможно!
+08/10/2019 01/21/11
+ERROR: Division by zero is not defined!
+08/10/2019 01/22/36
+ERROR: Дзяленне немагчыма!
+08/10/2019 01/22/43
+ERROR: Создание переменной с данным именем невозможно!
+08/10/2019 01/22/48
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/24/20
+ERROR: Дзяленне на нуль немагчыма!
+08/10/2019 01/24/25
+ERROR: Деление невозможно!
+08/10/2019 01/24/30
+ERROR: Creation of the variable with the name supplied is not possible!
+08/10/2019 01/26/07
+ERROR: Дзяленне немагчыма!
+08/10/2019 01/26/18
+ERROR: Деление на 0 невозможно!
+08/10/2019 01/26/24

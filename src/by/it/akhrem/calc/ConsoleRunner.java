@@ -35,6 +35,7 @@ public class ConsoleRunner {
                 printer.print(result);
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
+                Logger.getLogger().writeStr(e.getMessage());
             }
         }
     }

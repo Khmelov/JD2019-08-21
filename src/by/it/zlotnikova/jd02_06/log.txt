@@ -1,0 +1,6 @@
+08.10.19 15:12:22.112 LOG: I am the main thread
+08.10.19 15:12:22.112 LOG: I am thread 1
+08.10.19 15:12:22.112 LOG: I am thread 5
+08.10.19 15:12:22.112 LOG: I am thread 4
+08.10.19 15:12:22.112 LOG: I am thread 3
+08.10.19 15:12:22.112 LOG: I am thread 2

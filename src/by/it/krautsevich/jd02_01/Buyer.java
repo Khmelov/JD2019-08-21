@@ -4,13 +4,13 @@ import java.util.*;
 
 class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
 
-    int num ;
-    int sum ;
-    List<String> mySet ;
+    private int num ;
+    private int sum ;
+    private List<String> mySet ;
 
 
 
-    public Buyer (int num) {
+    Buyer (int num) {
         this.num = num ;
         this.setName("Покупатель № " + num + " ") ;
         this.sum = 0 ;
@@ -72,7 +72,7 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
         Thread.sleep(pause);
         int numberOfGoods = Rnd.fromTo(1, 4);                  // начинаем выбирать товары
 
-        HashMap <String, Integer> listOfGoods = new HashMap<>() ;
+ /*       HashMap <String, Integer> listOfGoods = new HashMap<>() ;
         listOfGoods.put("Хлеб" , 5) ;
         listOfGoods.put("Картошка" , 3) ;
         listOfGoods.put("Селедка" , 10) ;
@@ -87,12 +87,12 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
         listOfGoods.put("Лук", 2);
         listOfGoods.put("Мука", 6);
         listOfGoods.put("Мороженное", 6);
-        listOfGoods.put("Шоколад", 6);
+        listOfGoods.put("Шоколад", 6); */
 
-        Set<Map.Entry<String, Integer>> entry_set = listOfGoods.entrySet();
+ /*     Set<Map.Entry<String, Integer>> entry_set = Market.listOfGoods.entrySet();
         Iterator<Map.Entry<String, Integer>> it = entry_set.iterator() ;
 
-/*        for (int i = 0; i < numberOfGoods & (it.hasNext()) ; )    // этот вариант работает , но корзины получаются одинаковые
+       for (int i = 0; i < numberOfGoods & (it.hasNext()) ; )    // этот вариант работает , но корзины получаются одинаковые
          {
                 Map.Entry<String, Integer> me = it.next() ;
                 sum = sum + me.getValue() ;
@@ -100,9 +100,9 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
                 i++ ;
          }   */
 
-        int i = 0 ;                                              // этот вариант работает, но комп подвисает
+/*        int i = 0 ;                                              // этот вариант работает, но комп подвисает
         while (i < numberOfGoods) {
-            if (!it.hasNext()) {entry_set = listOfGoods.entrySet();}
+            if (!it.hasNext()) {entry_set = Market.listOfGoods.entrySet();}
 
             else
             for (; i < numberOfGoods & (it.hasNext()) ; ) {
@@ -113,7 +113,22 @@ class Buyer extends Thread implements Runnable, IBuyer, IUseBasket {
                             i++ ;}
                 else {it.next() ;}
             }
-        }
+        } */
+
+        Set<Integer> numberOfNeededList = new HashSet<>() ;
+        while (numberOfNeededList.size()!= numberOfGoods )
+            {numberOfNeededList.add(Rnd.fromTo(0,14));}
+        for (Integer element : numberOfNeededList)
+            {Set<Map.Entry<String, Integer>> entry_set = Market.listOfGoods.entrySet();
+            Iterator<Map.Entry<String, Integer>> it = entry_set.iterator() ;
+
+                for(int k = 0 ; k < element & (it.hasNext())  ; k++ )
+                {it.next() ; }
+                Map.Entry<String, Integer> me = it.next() ;
+
+                sum = sum + me.getValue() ;
+                mySet.add(me.getKey()) ;
+                }
 
         StringBuilder myString = new StringBuilder();
         myString.append(this).append(" положил в корзинку: ");
