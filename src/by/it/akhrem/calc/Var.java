@@ -22,16 +22,24 @@ public abstract class Var implements Operation {
 
 
     static Var createVar(String strVar) throws CalcException{
-        strVar = strVar.replace(" ", "");
-        if (strVar.matches(Patterns.SCALAR))
-            return new Scalar(strVar);
-        if (strVar.matches(Patterns.VECTOR))
-            return new Vector(strVar);
-        if (strVar.matches(Patterns.MATRIX))
-            return new Matrix(strVar);
+        Creator var = getVarCreator(strVar);
+        if (var != null)
+            return var.factoryMethod(strVar);
         if (vars.containsKey(strVar))
             return vars.get(strVar);
         throw new CalcException(rm.get("Var.ErrCannotCreate") + " " + strVar);
+    }
+
+    static Creator getVarCreator(String strVar){
+        strVar = strVar.replace(" ", "");
+        Creator var = null;
+        if (strVar.matches(Patterns.SCALAR))
+            var = new CreatorScalar();
+        if (strVar.matches(Patterns.VECTOR))
+            var = new CreatorVector();
+        if (strVar.matches(Patterns.MATRIX))
+            var = new CreatorMatrix();
+        return var;
     }
 
     @Override
@@ -59,3 +67,5 @@ public abstract class Var implements Operation {
         throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 }
+
+
