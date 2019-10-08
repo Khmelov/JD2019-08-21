@@ -8,6 +8,7 @@ class CalcException extends Exception {
     CalcException(String message) {
         super("ERROR: " + message);
         Logger.getLogger().log(message);
+        ShortReportMaker.collectErrors(message);
 
     }
 
