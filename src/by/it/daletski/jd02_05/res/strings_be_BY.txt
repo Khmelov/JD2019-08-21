@@ -1,4 +1,4 @@
-message.welcome=Прывiтанне?
+message.welcome=Прывiтанне!
 message.question=Як справы?
-user.firstname= Уладак
+user.firstname=Уладзiслау
 user.lastname=Далецкi

@@ -2,4 +2,3 @@ message.welcome=Привет!
 message.question=Как дела?
 user.firstname=Александр
 user.lastname=Хмелев
-

@@ -2,7 +2,7 @@ package by.it.daletski.jd01_03;
 
 public class InOut {
 
-    static double[] getArray(String line) {
+    public static double[] getArray(String line) {
         String[] strArr = line.split (" ");
         double[] res = new double[strArr.length];
 
@@ -24,7 +24,7 @@ public class InOut {
     }
 
 
-    static void printArray(double[] arr, String name, int columnCount) {
+    public static void printArray(double[] arr, String name, int columnCount) {
         for (int i = 0; i < arr.length; i++) {
             System.out.printf ("%s[% -3d]=%-10.4f ", name, i, arr[i]);
             if ((i + 1) % columnCount == 0 || i + 1 == arr.length)
