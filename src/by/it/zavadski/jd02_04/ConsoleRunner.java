@@ -3,7 +3,7 @@ package by.it.zavadski.jd02_04;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcException {
         Scanner scanner = new Scanner(System.in);
         String line;
 

@@ -18,17 +18,17 @@ abstract class Var implements Operation {
         }
     }
 
-    static Var createVar(String operand) throws NumberFormatException {
-        operand = operand.trim().replace(" ", "");
-        if (operand.matches(Patterns.SCALAR))
-            return new Scalar(operand);
-        else if (operand.matches(Patterns.VECTOR))
-            return new Vector(operand);
-        else if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
-        else if (vars.containsKey(operand))
-            return vars.get(operand);
-        throw new NumberFormatException();
+    static Var createVar(String strVar) throws CalcException {
+        strVar = strVar.trim().replace(" ", "");
+        if (strVar.matches(Patterns.SCALAR))
+            return new Scalar(strVar);
+        else if (strVar.matches(Patterns.VECTOR))
+            return new Vector(strVar);
+        else if (strVar.matches(Patterns.MATRIX))
+            return new Matrix(strVar);
+        else if (vars.containsKey(strVar))
+            return vars.get(strVar);
+        throw new CalcException("Невозможно создать "+strVar);
     }
 
     @Override

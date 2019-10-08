@@ -16,7 +16,7 @@ class Parser {
         prioririties.put("=", 0);
     }
 
-    Var calculate(String expression) {
+    Var calculate(String expression) throws CalcException {
         while (expression.contains("(")) {
             expression = simplifyExpression(expression);
         }
@@ -41,7 +41,7 @@ class Parser {
         return Var.createVar(operands.get(0));
     }
 
-    private String simplifyExpression(String expression) {
+    private String simplifyExpression(String expression) throws CalcException {
         Pattern inBracketsPattern = Pattern.compile(Patterns.BRACKETS);
         Matcher bracketsMatcher = inBracketsPattern.matcher(expression);
         if (bracketsMatcher.find()) {
@@ -68,7 +68,7 @@ class Parser {
         return index;
     }
 
-    private Var calculate(String left, String right, String operation) {
+    private Var calculate(String left, String right, String operation) throws CalcException {
         Var two = Var.createVar(right);
         if (operation.equals("="))
             return Var.saveVar(left, two);

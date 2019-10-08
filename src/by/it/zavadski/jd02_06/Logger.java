@@ -13,7 +13,7 @@ import java.util.Locale;
 
 
 public class Logger {
-    private static String filename="log.txt";
+    private static String filename="jd02_06_log.txt";
     private static String path=PathGenerator.filesPlace(Logger.class);
     private static String fullPath=path+ File.separator+filename;
 
@@ -36,10 +36,9 @@ public class Logger {
 
     static void log(String message){
         try(PrintWriter printWriter=new PrintWriter(new FileWriter(fullPath,true))){
-            DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH/mm");
-            //printWriter.println("LOG:"+message);
-            printWriter.printf("%s: %s\n",dateFormat.format(new Date()),message);
-            //printWriter.flush();
+            DateFormat dateFormat=new SimpleDateFormat("HH:mm:ss dd MMM yyyy");
+            printWriter.printf("%s\t%s\n",dateFormat.format(new Date()),message);
+            printWriter.flush();
         }
         catch (IOException e){
             e.printStackTrace();
