@@ -13,13 +13,7 @@ public class CheckI18N {
         Locale locale = getLocale ();
         ResourceManager rs = ResourceManager.INSTANCE;
         rs.setLocale (locale);
-//        if (args.length == 2) {
-//            String lang = args[0];
-//            String country = args[1];
-//            locale = new Locale (lang, country);
-//            rs.setLocale (locale);
-//        }
-      //  Locale.setDefault (locale);
+
         System.out.println (rs.get (Message.WELCOME));
         System.out.println (rs.get (Message.QUESTION));
         System.out.println (rs.get (User.FIRST_NAME));
@@ -36,8 +30,8 @@ public class CheckI18N {
     private static Locale getLocale() {
         Locale locale = Locale.getDefault ();
         Scanner sc = new Scanner (System.in);
-        String parameter = sc.nextLine ();
-        switch (parameter) {
+        String language = sc.nextLine ();
+        switch (language) {
             case "ru": {
                 locale = new Locale ("ru", "RU");
                 return locale;
@@ -53,6 +47,5 @@ public class CheckI18N {
         }
         return locale;
     }
-
 
 }
