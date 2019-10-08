@@ -1,17 +1,17 @@
-package by.it.zhukovskaya.jd02_05;
+package by.it.zhukovskaya.jd02_05.calc;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-enum ResourceManager {
+enum ResMan {
     INSTANCE;
 
     private String baseName;
     private ResourceBundle resourceBundle;
     private Locale locale;
 
-    ResourceManager() {
-        baseName="by.it.zhukovskaya.jd02_05.res.strings";
+    ResMan() {
+        baseName="by.it.zhukovskaya.calc.res.strings";
         setLocale(Locale.getDefault());
     }
 
@@ -23,4 +23,6 @@ enum ResourceManager {
     String get(String key) {
         return resourceBundle.getString(key);
     }
+
+
 }

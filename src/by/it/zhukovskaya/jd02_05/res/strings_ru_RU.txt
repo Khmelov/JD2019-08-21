@@ -1,4 +1,5 @@
-message.welcome=Здравствуйте!
+message.welcome=Привет!
 message.question=Как дела?
+message.suggestion=Введите тип локали(en, ru, be, end-выход):
 user.firstname=Ольга
 user.lastname=Жуковская

@@ -1,31 +1,108 @@
 package by.it.zhukovskaya.jd02_02;
 
-import java.util.HashMap;
-import java.util.Map;
+public class Buyer extends Thread implements IBuyer, IUseBasket {
 
-public class Buyer extends Thread implements IBuyer, IUseBacket {
-    Map<String, Double> basket = null;
+    private static Basket basket;
+    private static boolean pensioner;
 
-    public Buyer(int number) {
-        super("Buyer " + number);
-        Dispathcher.buyerInMarket();
+    Basket getBasket() {
+        return basket;
     }
 
-    public Map<String, Double> getBasket() {
-        return basket;
+    Buyer() {
+        int randomNumber = Util.randomFromTo(1, 4);
+        pensioner = randomNumber == 1;
+        if (pensioner) {
+            this.setName("Покупатель(пенсионер) №" + Dispatcher.buyerEnter());
+        } else {
+            this.setName("Покупатель №" + Dispatcher.buyerEnter());
+        }
+        basket = new Basket();
     }
 
     @Override
     public void run() {
         enterToMarket();
+        takeBasket();
         chooseGoods();
+        putGoodsToBasket();
         goToQueue();
         goOut();
     }
 
     @Override
     public void enterToMarket() {
-        System.out.println("---> Enter to market " + this);
+
+        System.out.println(">>> " + this + " вошел в магазин");
+    }
+
+    @Override
+    public void takeBasket() {
+        try {
+            int pause = Util.randomFromTo(100, 200);
+            if (pensioner) {
+                Util.sleepPensioner(pause);
+            } else {
+                Util.sleepAccelerated(pause);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(this.getName() + ": ожидание завершено некорректно при вызове takeBasket()!");
+        }
+        System.out.println("\\_/ " + this + " взял корзину");
+    }
+
+    @Override
+    public void chooseGoods() {
+        try {
+            int pause = Util.randomFromTo(500, 2000);
+            if (pensioner) {
+                Util.sleepPensioner(pause);
+            } else {
+                Util.sleepAccelerated(pause);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(this.getName() + ": ожидание завершено некорректно при вызове chooseGoods()!");
+        }
+        System.out.println("||| " + this + " выбрал товар");
+    }
+
+    @Override
+    public void putGoodsToBasket() {
+        try {
+            int pause = Util.randomFromTo(100, 200);
+            if (pensioner) {
+                Util.sleepPensioner(pause);
+            } else {
+                Util.sleepAccelerated(pause);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(this.getName() + ": ожидание завершено некорректно при вызове putGoodsToBasket()!");
+        }
+    }
+
+    @Override
+    public void goToQueue() {
+        BuyersQueue.add(this);
+        System.out.println("... " + this + " встал в очередь");
+        for (Cashier cashier : Dispatcher.cashierList) {
+            synchronized (cashier) {
+                cashier.notify();
+            }
+        }
+        synchronized (this) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                System.out.println("Ошибка во время ожидания покупателя " + this);
+            }
+        }
+        System.out.println("!!! " + this + " покинул очередь");
+    }
+
+    @Override
+    public void goOut() {
+        Dispatcher.buyerExit();
+        System.out.println("<<< " + this + " вышел из магазина");
     }
 
     @Override
@@ -33,60 +110,4 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         return this.getName();
     }
 
-    @Override
-    public void chooseGoods() {
-        takeBacket();
-        System.out.println("started to choose goods " + this);
-        //int timeout = Util.random(2000);
-        //Util.sleep(timeout);
-        putGoodsToBacket();
-        System.out.println("end to choose goods " + this);
-    }
-
-    @Override
-    public void goOut() {
-        System.out.println("<--- leave the market " + this);
-        Dispathcher.buyerLeaveMarket();
-    }
-
-    @Override
-    public void goToQueue() {
-        System.out.println(this + " added to Queue");
-        QueueBuyers.add(this);
-        synchronized (this) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println(this + " leave CashBack");
-    }
-
-    @Override
-    public void takeBacket() {
-        basket = new HashMap<>(4);
-        int timeout = Util.random(100, 200);
-        Util.sleep(timeout);
-        System.out.println(this + " takes a basket");
-    }
-
-    @Override
-    public void putGoodsToBacket() {
-        int cntGoods = Util.random(1, 4);
-        if (basket == null)
-            System.out.println(this + " doesn't have a basket");
-        else {
-            for (int i = 1; i <= cntGoods; i++) {
-                int timeout = Util.random(100, 200);
-                Util.sleep(timeout);
-                Map.Entry<String, Double> e = Market.getRandomGoods();
-                if (e != null) {
-                    basket.put(e.getKey(), e.getValue());
-                    System.out.println(this + " puts " + e.getKey() + " - " + e.getValue() + " BYN  to basket.");
-                }
-            }
-        }
-
-    }
 }
