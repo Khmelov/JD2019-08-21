@@ -1,7 +1,8 @@
 package by.it.zavadski.jd02_04;
 
-public class Printer {
-    void print(Var var){
-        System.out.println(var);
+class Printer {
+    void print(Var var) {
+        if (var != null)
+            System.out.println(var);
     }
 }

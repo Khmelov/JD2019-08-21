@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -20,16 +23,23 @@ public class Logger {
     }
 
     public static Logger getLogger() {
-        if (logger == null) synchronized (Logger.class) {
-            if (logger == null) logger = new Logger();
+        Logger localLogger=logger;
+        if (localLogger == null)
+            synchronized (Logger.class) {
+            localLogger=logger;
+            if (localLogger == null)
+                localLogger = new Logger();
+            logger=localLogger;
         }
-        return logger;
+        return localLogger;
     }
 
     static void log(String message){
         try(PrintWriter printWriter=new PrintWriter(new FileWriter(fullPath,true))){
-            printWriter.println("LOG:"+message);
-            printWriter.flush();
+            DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH/mm");
+            //printWriter.println("LOG:"+message);
+            printWriter.printf("%s: %s\n",dateFormat.format(new Date()),message);
+            //printWriter.flush();
         }
         catch (IOException e){
             e.printStackTrace();
