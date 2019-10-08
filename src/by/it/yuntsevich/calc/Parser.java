@@ -32,12 +32,12 @@ class Parser {
     }
 
     private String calcOneOperation(String left, String operation, String right) throws CalcException{
-        Var two = Var.createVar(right);
+        Var two = VarFactory.createVar(right);
         if (operation.equals("=")){
-            Var.saveVar(left,two);
+            VarFactory.saveVar(left,two);
             return two.toString();
         }
-        Var one = Var.createVar(left);
+        Var one = VarFactory.createVar(left);
             switch (operation) {
                 case "+":
                     return one.add(two).toString();
@@ -100,7 +100,7 @@ class Parser {
             String tmpResult = calcOneOperation(left, operation, right);
             operands.add(index,tmpResult);
         }
-        return Var.createVar(operands.get(0));
+        return VarFactory.createVar(operands.get(0));
     }
 
 
