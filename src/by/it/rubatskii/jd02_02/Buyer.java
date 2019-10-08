@@ -1,69 +1,108 @@
 package by.it.rubatskii.jd02_02;
 
-
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
-    Map<String, Double> basket = null;
+    private static Basket basket;
+    private static boolean pensioner;
+
+    Basket getBasket() {
+        return basket;
+    }
 
     Buyer() {
-        super("Buyer № " + Dispatcher.buyerInMarket());
-
+        int randomNumber = Util.randomFromTo(1, 4);
+        pensioner = randomNumber == 1;
+        if (pensioner) {
+            this.setName("Buyer retiree №" + Dispatcher.buyerEnter());
+        } else {
+            this.setName("Buyer №" + Dispatcher.buyerEnter());
+        }
+        basket = new Basket();
     }
 
     @Override
     public void run() {
-
-        this.getName();
         enterToMarket();
         takeBasket();
-        putGoodsToBasket();
         chooseGoods();
+        putGoodsToBasket();
         goToQueue();
         goOut();
-
     }
 
     @Override
     public void enterToMarket() {
-        System.out.println(this + " enter to Market");
+
+        System.out.println(">>> " + this + " go to Market");
+    }
+
+    @Override
+    public void takeBasket() {
+        try {
+            int pause = Util.randomFromTo(100, 200);
+            if (pensioner) {
+                Util.sleepPensioner(pause);
+            } else {
+                Util.sleepAccelerated(pause);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(this.getName() + ": exception to takeBasket()!");
+        }
+        System.out.println(this + " take a basket");
     }
 
     @Override
     public void chooseGoods() {
-        System.out.println(this + " started to choose goods");
-        int timeout = Util.random(2000);
-        Util.sleep(timeout);
-        System.out.println(this + " end to choose goods");
-
+        try {
+            int pause = Util.randomFromTo(500, 2000);
+            if (pensioner) {
+                Util.sleepPensioner(pause);
+            } else {
+                Util.sleepAccelerated(pause);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(this.getName() + ": exception chooseGoods()!");
+        }
+        System.out.println(this + " chose the goods");
     }
 
+    @Override
+    public void putGoodsToBasket() {
+        try {
+            int pause = Util.randomFromTo(100, 200);
+            if (pensioner) {
+                Util.sleepPensioner(pause);
+            } else {
+                Util.sleepAccelerated(pause);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(this.getName() + ": exception putGoodsToBasket()!");
+        }
+    }
 
     @Override
     public void goToQueue() {
-        System.out.println(this + " added to Queue");
-        QueueBuyers.add(this);
+        BuyersQueue.add(this);
+        System.out.println(this + " go to queue");
+        for (Cashier cashier : Dispatcher.cashierList) {
+            synchronized (cashier) {
+                cashier.notify();
+            }
+        }
         synchronized (this) {
             try {
                 this.wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("Exception buyer " + this);
             }
         }
-        System.out.println(this + " leave CashDeck");
-
-
+        System.out.println(this + " leave to queue ");
     }
 
     @Override
     public void goOut() {
+        Dispatcher.buyerExit();
         System.out.println(this + " leave to Market");
-        Dispatcher.buyerLeaveMarket();
-
     }
 
     @Override
@@ -71,33 +110,4 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         return this.getName();
     }
 
-    @Override
-    public void takeBasket() {
-        int pause = Util.random(100, 200);
-        basket = new HashMap<>(4);
-        Util.sleep(pause);
-        System.out.println(this + " take basket");
-
-    }
-
-    @Override
-    public void putGoodsToBasket() {
-        int cntGoods = Util.random(1, 4);
-        if (basket == null)
-            System.out.println(this + " doesn't have a basket");
-        else {
-            for (int i = 1; i <= cntGoods; i++) {
-                int timeout = Util.random(100, 200);
-                Util.sleep(timeout);
-                Map.Entry<String, Double> e = Market.getRandomGoods();
-                if (e != null) {
-                    basket.put(e.getKey(), e.getValue());
-                    System.out.println(this + " puts " + e.getKey() + " - " + e.getValue() + " $  to basket.");
-                }
-            }
-        }
-
-    }
 }
-
-

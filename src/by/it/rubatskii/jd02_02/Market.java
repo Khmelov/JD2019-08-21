@@ -1,63 +1,60 @@
 package by.it.rubatskii.jd02_02;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Market {
 
-    static Map<String, Double> goodsList = new HashMap<>(15);
+    private static List<Thread> peopleList = new ArrayList<>();
 
-    static Map.Entry<String, Double> getRandomGoods() {
-        goodsList.putIfAbsent("Milk", 1.66);
-        goodsList.putIfAbsent("Cheese", 9.22);
-        goodsList.putIfAbsent("Bread", 1.47);
-        goodsList.putIfAbsent("Meat", 9.82);
-        goodsList.putIfAbsent("Juice", 6.11);
-        goodsList.putIfAbsent("Pasta", 5.25);
-        goodsList.putIfAbsent("Sushi", 22.05);
-        Set<Map.Entry<String, Double>> entries = goodsList.entrySet();
-        Iterator<Map.Entry<String, Double>> itr = entries.iterator();
-        int number = Util.random(1, goodsList.size());
-        int i = 0;
-        while (itr.hasNext()) {
-            i++;
-            if (i == number)
-                return itr.next();
-            else itr.next();
-        }
-        return null;
-    }
+//    public static void main(String[] args) {
+//        for (int i = 0; i < 500; i++) {
+//            main1(args);
+//            Dispatcher.reset();
+//        }
+//    }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main (String[] args) {
+
         System.out.println("Market opened");
 
-
-        List<Thread> actorList = new ArrayList<>(200);
         for (int i = 1; i <= 2; i++) {
             Cashier cashier = new Cashier(i);
             Thread thread = new Thread(cashier);
-            actorList.add(thread);
+            peopleList.add(thread);
+            Dispatcher.cashierList.add(cashier);
             thread.start();
         }
+
         while (!Dispatcher.planComplete()) {
-            for (int time = 1; time <= 120; time++) {
-                int countBuyer = Util.random(2);
-                for (int i = 0; i < countBuyer; i++) {
-                    if (!Dispatcher.planComplete()) {
-                        Buyer buyer = new Buyer();
-                        actorList.add(buyer);
-                        buyer.start();
-                    }
-                    Util.sleep(1000);
-                }
-                for (Thread actor : actorList) {
-                    actor.join();
-                }
+            int buyersEntered = Util.randomUpTo(2);
 
+            for (int j = 1; j <= buyersEntered; j++) {
+                if (!Dispatcher.planComplete()) {
+                    Buyer buyer = new Buyer();
+                    peopleList.add(buyer);
+                    buyer.start();
                 }
-
-                System.out.println("Market closed");
             }
 
+
+            try {
+                Util.sleepAccelerated(1000);
+            } catch (InterruptedException e) {
+                System.out.println("Main:exception sleep!");
+            }
         }
+
+        preventFromClosing();
+        System.out.println("Market closed");
     }
 
+    private static void preventFromClosing() {
+        for (Thread person : peopleList) {
+            try {
+                person.join();
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+}
