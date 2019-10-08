@@ -2,6 +2,7 @@ package by.it.zavadski.jd02_06.calc;
 
 import by.it.zavadski.jd02_05.Errors;
 import by.it.zavadski.jd02_05.ResourceManager;
+import by.it.zavadski.jd02_06.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,10 @@ abstract class Var implements Operation {
 
     static void printVar() {
         for (Map.Entry<String, Var> entry : vars.entrySet()) {
-            System.out.println(entry.getKey() + "=" + entry.getValue());
+            StringBuilder varValue=new StringBuilder();
+            varValue.append(entry.getKey()).append("=").append(entry.getValue());
+            System.out.println(varValue);
+            Logger.log(varValue.toString());
         }
     }
 

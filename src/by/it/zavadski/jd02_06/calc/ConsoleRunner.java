@@ -23,25 +23,30 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         while (!(line = scanner.nextLine()).toLowerCase().equals("end")) {
-            if (line.equals("printvar")) {
+            if (line.equals("prv")) {
+                Logger.log("prv: ");
                 Var.printVar();
                 continue;
             }
             if (line.equals("en")) {
                 resourceManager.setLocale(new Locale("en", "US"));
+                Logger.log("Locale changed to en-US");
                 continue;
             }
             if (line.equals("ru")) {
                 resourceManager.setLocale(new Locale("ru", "RU"));
+                Logger.log("Locale changed to ru-RU");
                 continue;
             }
             if (line.equals("be")) {
                 resourceManager.setLocale(new Locale("be", "BY"));
+                Logger.log("Locale changed to be-BY");
                 continue;
             }
             try {
                 Var result = parser.calculate(line);
                 printer.print(result);
+                Logger.log(result.toString());
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
                 Logger.log(e.getMessage());
