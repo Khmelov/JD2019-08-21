@@ -1,90 +1,78 @@
 package by.it.zhukovskaya.jd02_05.calc;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
 
-    private static final Map<String, Integer> operationPriorities = new HashMap<>();
+    private final HashMap<String, Integer> prTable=new HashMap<String,Integer>(){
+        {
+            this.put("=",0);
+            this.put("+",1);
+            this.put("-",1);
+            this.put("*",2);
+            this.put("/",2);
+        }
+    };
 
-    static {
-        operationPriorities.put("*", 2);
-        operationPriorities.put("/", 2);
-        operationPriorities.put("+", 1);
-        operationPriorities.put("-", 1);
-        operationPriorities.put("=", 0);
+    private int getIndex(List<String> operations) {
+        int index=-1;
+        int pr=-1;
+        for (int i = 0; i < operations.size(); i++) {
+            String operation = operations.get(i);
+            if (pr < prTable.get(operation)) {
+                index = i;
+                pr=prTable.get(operation);
+            }
+        }
+        return index;
     }
 
-    Var calculateExpression(String expression) throws CalcException {
-        while (expression.contains("(")) {
-            expression = simplifyExpression(expression);
+    private Var calcOneOperation(String left, String operation, String right) throws CalcException {
+        if (operation.contains("=")) {
+            Var two = Var.createVar(right);
+            Var.saveVar(left, two);
+            return two;
         }
 
-        expression = expression.trim().replace(" ", "");
-        List<String> operands = new LinkedList<>(Arrays.asList(expression.split(Patterns.operation)));
-        List<String> operations = new ArrayList<>();
-        Pattern operationPattern = Pattern.compile(Patterns.operation);
-        Matcher matcherOperation = operationPattern.matcher(expression);
-        while (matcherOperation.find())
-            operations.add(matcherOperation.group());
+        Var one = Var.createVar(left);
+        Var two = Var.createVar(right);
 
-        while (operations.size() > 0) {
-            int index = getPriorityIndex(operations);
-            String operation = operations.remove(index);
-            String right = operands.remove(index + 1);
-            String left = operands.remove(index);
-            Var tempResult = calculateOperation(left, right, operation);
-            operands.add(index, tempResult.toString());
+        switch (operation) {
+            case "+":
+                return one.add(two);
+            case "-":
+                return one.sub(two);
+            case "*":
+                return one.mul(two);
+            case "/":
+                return one.div(two);
         }
+        throw new CalcException(Var.rm.get("Parser.ErrUnknownOperation") + " " +operation);
+    }
 
+    Var calc(String expression) throws CalcException{
+        expression = expression.replace(" ", "");
+        String[] part = expression.split(Patterns.OPERATION);
+        List<String> operands=new ArrayList<>(Arrays.asList(part));
+        List<String> operations=new ArrayList<>();
+        Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
+        Matcher matcher = patternOperation.matcher(expression);
+        while (matcher.find())
+            operations.add(matcher.group());
+        while (!operations.isEmpty()){
+            int index=getIndex(operations);
+            String operation=operations.remove(index);
+            String left=operands.remove(index);
+            String right=operands.remove(index);
+            Var tmp = calcOneOperation(left, operation, right);
+            operands.add(index,tmp.toString());
+        }
         return Var.createVar(operands.get(0));
     }
 
-    private String simplifyExpression(String expression) throws CalcException {
-        Pattern partInBrackets = Pattern.compile(Patterns.PriorityBrackets);
-        Matcher bracketsMatcher = partInBrackets.matcher(expression);
-        if (bracketsMatcher.find()) {
-            int start = bracketsMatcher.start();
-            int end = bracketsMatcher.end();
-            String expressionInBrackets = bracketsMatcher.group();
-            expressionInBrackets = expressionInBrackets.replace("(", "").replace(")", "");
-            Var result = calculateExpression(expressionInBrackets);
-            expression = expression.replace(expression.substring(start, end), result.toString());
-        }
-        return expression;
-    }
-
-    private int getPriorityIndex(List<String> operations) {
-        int priorityIndex = -1;
-        int priority = -1;
-        for (int i = 0, operationsSize = operations.size(); i < operationsSize; i++) {
-            int trialPriority = operationPriorities.get(operations.get(i));
-            if (trialPriority > priority) {
-                priority = trialPriority;
-                priorityIndex = i;
-            }
-        }
-        return priorityIndex;
-    }
-
-    private Var calculateOperation(String strLeft, String strRight, String operation) throws CalcException {
-        Var right = Var.createVar(strRight);
-        if (operation.equals("="))
-            return Var.saveVar(strLeft, right);
-        Var left = Var.createVar(strLeft);
-        if (left == null || right == null)
-            throw new NullPointerException();
-        switch (operation) {
-            case "+":
-                return left.add(right);
-            case "-":
-                return left.sub(right);
-            case "*":
-                return left.mul(right);
-            case "/":
-                return left.div(right);
-        }
-        throw new NullPointerException();
-    }
 }

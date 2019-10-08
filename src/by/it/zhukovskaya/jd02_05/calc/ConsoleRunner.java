@@ -3,47 +3,38 @@ package by.it.zhukovskaya.jd02_05.calc;
 import java.util.Locale;
 import java.util.Scanner;
 
-import static by.it.zhukovskaya.jd02_05.calc.ResourceManager.INSTANCE;
-
 public class ConsoleRunner {
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            ResourceManager resMan = INSTANCE;
-            String line;
+        Scanner sc = new Scanner(System.in);
+        Parser parser = new Parser();
+        Printer printer = new Printer();
+        for(;;) {
+            String expression = sc.nextLine();
+            if (expression.equals("end")) break;
+            if (expression.equals("printvar")) Var.printvar();
+            Locale locale;
 
-            if (args.length == 2) {
-                String language = args[0];
-                String country = args[1];
-                Locale locale = new Locale(language, country);
-                resMan.switchLocale(locale);
+            if (expression.equals("ru")) {
+                locale = new Locale("ru", "RU");
+                Var.rm.setLocale(locale);
+                continue;
+            }
+            if (expression.equals("be"))  {
+                locale = new Locale("be", "BY");
+                Var.rm.setLocale(locale);
+                continue;
+            }
+            if (expression.equals("en")) {
+                locale = Locale.ENGLISH;
+                Var.rm.setLocale(locale);
+                continue;
             }
 
-            Parser parser = new Parser();
-            Printer printer = new Printer();
-
-            while (!(line = scanner.nextLine()).equals("end")) {
-                if (line.equals("printvar")) {
-                    Var.printVar();
-                    continue;
-                }
-                if (line.equals("en")) {
-                    resMan.switchLocale(new Locale("en", "US"));
-                    continue;
-                }
-                if (line.equals("ru")) {
-                    resMan.switchLocale(new Locale("ru", "RU"));
-                    continue;
-                }
-                if (line.equals("be")) {
-                    resMan.switchLocale(new Locale("be", "BY"));
-                    continue;
-                }
-                try {
-                    Var result = parser.calculateExpression(line);
-                    printer.print(result);
-                } catch (CalcException e) {
-                    System.out.println(e.getMessage());
-                }
+            try {
+                Var result = parser.calc(expression);
+                printer.print(result);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

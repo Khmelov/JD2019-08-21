@@ -1,11 +1,13 @@
-package by.it.zhukovskaya.jd02_05.calc;
+package by.it.zhukovskaya.jd02_06.calc;
 
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class MatrixTest {
+
     @Test
-    public void matrixAdd() throws CalcException {
+    public void matrixAdd() throws CalculationException {
         String expression = "A={{1,2},{3,4}}+{{4,3},{2,1}}";
         String expected = "{{5.0, 5.0}, {5.0, 5.0}}";
         Parser parser = new Parser();
@@ -14,7 +16,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void matrixSub() throws CalcException {
+    public void matrixSub() throws CalculationException {
         String expression = "A={{1,2},{3,4}}-{{-4,3},{-2,1}}";
         String expected = "{{5.0, -1.0}, {5.0, 3.0}}";
         Parser parser = new Parser();
@@ -23,7 +25,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void matrixMul() throws CalcException {
+    public void matrixMul() throws CalculationException {
         String expression = "A={{1,2},{3,4}}*{{4,3},{2,1}}";
         String expected = "{{8.0, 5.0}, {20.0, 13.0}}";
         Parser parser = new Parser();
@@ -32,7 +34,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void matrixDiv() throws CalcException {
+    public void matrixDiv() throws CalculationException {
         String expression = "A={{1,2},{6,4}}/4";
         String expected = "{{0.25, 0.5}, {1.5, 1.0}}";
         Parser parser = new Parser();
@@ -41,7 +43,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void matrixCombined() throws CalcException {
+    public void matrixCombined() throws CalculationException {
         String expression = "A=({{1,0},{0,1}}*{{4,3},{2,1}}+{{-4,-3},{-2,-1}}-{{2,1},{2,1}})/4";
         String expected = "{{-0.5, -0.25}, {-0.5, -0.25}}";
         Parser parser = new Parser();
@@ -50,11 +52,10 @@ public class MatrixTest {
     }
 
     @Test
-    public void matrixToString() throws CalcException {
+    public void matrixToString() throws CalculationException {
         Var matrix = Var.createVar("{{1,2,3},{4,5,6},{7,8,9}}");
         String expected = "{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}}";
         String actual = matrix.toString();
         assertEquals(expected,actual);
     }
 }
-

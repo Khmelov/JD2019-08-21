@@ -1,69 +1,65 @@
 package by.it.zhukovskaya.jd02_05.calc;
 
-class Scalar extends Var {
+public class Scalar extends Var {
 
     private double value;
-    private static ResourceManager resMan = ResourceManager.INSTANCE;
+
+    public Scalar(double value) {
+        this.value = value;
+    }
+
+    public Scalar(Scalar otherScalar) {
+        value = otherScalar.value;
+    }
+
+    public Scalar(String stringValue) {
+        value = Double.valueOf(stringValue);
+    }
 
     public double getValue() {
         return value;
     }
 
-    Scalar(double value) {
-        this.value = value;
-    }
-
-    Scalar(String str) {
-        this.value = Double.parseDouble(str);
-    }
-
-    Scalar(Scalar otherScalar) {
-        this.value = otherScalar.value;
+    @Override
+    public String toString() {
+        return Double.toString(value);
     }
 
     @Override
     public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
-            double sum = this.value + ((Scalar) other).value;
-            return new Scalar(sum);
-        } else return other.add(this); //если other был вектором или матрицей, то add ищем в соответствующем классе
+            double result = this.value + ((Scalar) other).value;
+            return new Scalar(result);
+        }
+        return other.add(this);
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
-            double sub = this.value - ((Scalar) other).value;
-            return new Scalar(sub);
-        } else {
-            Scalar minus = new Scalar(-1);
-            return other.mul(minus).add(this); //5-{1,2,3} --> -1*{1,2,3}+5
+            double result = this.value - ((Scalar) other).value;
+            return new Scalar(result);
         }
+        return new Scalar(-1).mul(other.sub(this));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
-            double product = this.value * ((Scalar) other).value;
-            return new Scalar(product);
-        } else {
-            return other.mul(this);
+            double result = this.value * ((Scalar) other).value;
+            return new Scalar(result);
         }
+        return other.mul(this);
     }
 
     @Override
-    public Var div(Var other) throws CalcException {
+    public Var div(Var other) throws CalcException{
         if (other instanceof Scalar) {
             if (((Scalar) other).value == 0)
-                throw new CalcException(resMan.getString(Message.DIVISION_BY_ZERO));
-            double div = this.value / ((Scalar) other).value;
-            return new Scalar(div);
-        } else {
-            return super.div(other);
+                throw new CalcException("Division by zero");
+            double result = this.value / ((Scalar) other).value;
+            return new Scalar(result);
         }
-    }
-
-    @Override
-    public String toString() {
-        return Double.toString(value);
+        return super.div(other);
     }
 }

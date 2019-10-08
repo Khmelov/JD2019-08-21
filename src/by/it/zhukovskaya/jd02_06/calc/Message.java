@@ -1,4 +1,4 @@
-package by.it.zhukovskaya.jd02_05.calc;
+package by.it.zhukovskaya.jd02_06.calc;
 
 class Message {
     static String DIVISION_BY_ZERO = "message.divisionbyzero";

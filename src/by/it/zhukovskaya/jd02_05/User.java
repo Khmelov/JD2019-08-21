@@ -1,7 +1,6 @@
 package by.it.zhukovskaya.jd02_05;
 
 public interface User {
-    String FIRSTNAME = "user.firstname";
-    String LASTNAME = "user.lastname";
+    String FIRST_NAME="user.firstname";
+    String LAST_NAME="user.lastname";
 }
-

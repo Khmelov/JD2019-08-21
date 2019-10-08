@@ -1,59 +1,61 @@
 package by.it.zhukovskaya.jd02_05.calc;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-abstract class Var implements Operation {
+public abstract class Var implements Operation {
 
-    private static Map<String, Var> variables = new HashMap<>();
-    private static ResourceManager resMan = ResourceManager.INSTANCE;
+    static ResMan rm = ResMan.INSTANCE;
+
+    private static Map<String, Var> vars = new HashMap<>();
 
     static Var saveVar(String name, Var var) {
-        variables.put(name, var);
+        vars.put(name, var);
         return var;
     }
 
-    static void printVar() {
-        for (Map.Entry<String, Var> entry : variables.entrySet()) {
-            System.out.println(entry.getKey() + "=" + entry.getValue());
-        }
+    public static void printvar(){
+        for(Map.Entry<String, Var> entry: vars.entrySet())
+            System.out.println(entry.getKey()+"=" + entry.getValue());
     }
 
-    static Var createVar(String operand) throws CalcException {
-        operand = operand.trim().replace(" ", "");
-        if (operand.matches(Patterns.SCALAR))
-            return new Scalar(operand);
-        else if (operand.matches(Patterns.VECTOR))
-            return new Vector(operand);
-        else if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
-        else if (variables.containsKey(operand))
-            return variables.get(operand);
-        throw new CalcException(resMan.getString(Message.IMPOSSIBLE_TO_CREATE));
+
+    static Var createVar(String strVar) throws CalcException{
+        strVar = strVar.replace(" ", "");
+        if (strVar.matches(Patterns.SCALAR))
+            return new Scalar(strVar);
+        if (strVar.matches(Patterns.VECTOR))
+            return new Vector(strVar);
+        if (strVar.matches(Patterns.MATRIX))
+            return new Matrix(strVar);
+        if (vars.containsKey(strVar))
+            return vars.get(strVar);
+        throw new CalcException(rm.get("Var.ErrCannotCreate") + " " + strVar);
     }
 
     @Override
     public String toString() {
-        return "Это класс Var";
+        return "{Abstract var}";
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(resMan.getString(Message.IMPOSSIBLE_TO_ADD));
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(resMan.getString(Message.IMPOSSIBLE_TO_SUB));
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 
     @Override
-    public Var mul(Var other) throws CalcException {
-        throw new CalcException(resMan.getString(Message.IMPOSSIBLE_TO_MUL));
+    public Var mul(Var other) throws CalcException{
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 
     @Override
-    public Var div(Var other) throws CalcException {
-        throw new CalcException(resMan.getString(Message.IMPOSSIBLE_TO_DIV));
+    public Var div(Var other) throws CalcException{
+        throw new CalcException(rm.get("Var.ErrOperation") + " " + this + " + " + other + rm.get("Var.ErrUnavailable")+ "\n");
     }
 }
