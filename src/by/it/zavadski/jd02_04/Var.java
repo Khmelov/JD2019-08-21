@@ -1,25 +1,30 @@
 package by.it.zavadski.jd02_04;
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 abstract class Var implements Operation {
 
-    private static String filename = getPath(Var.class).concat("vars.txt");
-    private static Map<String, Var> vars=new HashMap<>();
-    static Var saveVar(String name, Var var){
-    vars.put(name, var);
-    return var;
+    private static Map<String, Var> vars = new HashMap<>();
 
-}
-     static Var createVar(String strVar) throws CalcException {
-         strVar=strVar.trim().replace("\\s+","");
-        if(strVar.matches(Patterns.SCALAR))
+    static Var saveVar(String name, Var var) {
+        vars.put(name, var);
+        return var;
+    }
+
+    static void printVar() {
+        for (Map.Entry<String, Var> entry : vars.entrySet()) {
+            System.out.println(entry.getKey() + "=" + entry.getValue());
+        }
+    }
+
+    static Var createVar(String strVar) throws CalcException {
+        strVar = strVar.trim().replace(" ", "");
+        if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
-        if(strVar.matches(Patterns.VECTOR))
+        else if (strVar.matches(Patterns.VECTOR))
             return new Vector(strVar);
-        if(strVar.matches(Patterns.MATRIX))
+        else if (strVar.matches(Patterns.MATRIX))
             return new Matrix(strVar);
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
@@ -27,33 +32,31 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) throws CalcException {
-    throw new CalcException("Операция сложения "+ this+"+" + other+" невозможна");
+    public String toString() {
+        return "Это класс Var";
     }
 
     @Override
-    public Var sub(Var other) throws CalcException {
-        throw new CalcException("Операция вычитания "+ this+"-" + other+" невозможна");
+    public Var add(Var other) {
+        System.out.println("Сложение " + this + " и " + other + " невозможно");
+        return null;
     }
 
     @Override
-    public Var mul(Var other) throws CalcException {
-        throw new CalcException("Операция умножения "+ this+"*" + other+" невозможна");
+    public Var sub(Var other) {
+        System.out.println("Вычитание " + this + " из " + other + " невозможно");
+        return null;
     }
 
     @Override
-    public Var div(Var other) throws CalcException {
-        throw new CalcException("Операция деления "+ this+":" + other+" невозможна");
+    public Var mul(Var other) {
+        System.out.println("Умножение " + this + " на " + other + " невозможно");
+        return null;
     }
 
-    public String toString(){return "Abstract class Var";}
-
-    private static String getPath(Class<?> taskAClass) {
-        String rootProject = System.getProperty("user.dir");
-        String subPath = taskAClass.getName()
-                .replace(".", File.separator)
-                .replace(taskAClass.getSimpleName(), "");
-        return rootProject + File.separator + "src" + File.separator + subPath;
+    @Override
+    public Var div(Var other) {
+        System.out.println("Деление " + this + " на " + other + " невозможно");
+        return null;
     }
-
 }
