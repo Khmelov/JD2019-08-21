@@ -23,7 +23,7 @@ public class Test_jd01_13 {
                             .include("java.lang.")
                             .include("Exception")
                             .include("line:")
-                            .include(".TaskA")
+                            .include(".CheckI18N")
                             .strOut.toString());
         }
         assertTrue("В выводе нет NumberFormatException", sb.toString().contains("NumberFormatException"));

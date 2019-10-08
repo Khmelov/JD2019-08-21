@@ -1,0 +1,36 @@
+08.10.19 17:28:50.208 LOG: 2+2 calculated
+08.10.19 17:28:50.208 LOG: 5-7 calculated
+08.10.19 17:28:50.208 LOG: {1,2}+{3,4} calculated
+08.10.19 17:29:56.009 LOG: a=7 calculated
+08.10.19 17:29:56.009 LOG: a+6 calculated
+08.10.19 17:29:56.009 LOG: {1,2} +a calculated
+08.10.19 17:29:56.009 LOG: ERROR: невозможно создать powrtih
+08.10.19 17:29:56.009 LOG: ERROR: векторы разной длины
+08.10.19 19:59:56.35 LOG: 5+5 calculated
+08.10.19 19:59:56.35 LOG: 12-7 calculated
+08.10.19 19:59:56.35 LOG: ERROR: невозможно создать iuf
+08.10.19 19:59:56.35 LOG: 42 calculated
+08.10.19 20:26:29.62 LOG:  calculator started
+08.10.19 20:26:29.62 LOG: 6+6 calculated
+08.10.19 20:26:29.62 LOG: 2-5 calculated
+08.10.19 20:26:29.62 LOG: ERROR: невозможно создать rtn
+08.10.19 20:26:29.62 LOG:  calculator finished
+08.10.19 20:41:12.247 LOG: calculator started
+08.10.19 20:41:12.247 LOG: 5+5 calculated, result: 10.0
+08.10.19 20:41:12.247 LOG: calculator finished
+08.10.19 21:29:14.938 LOG: calculator started
+08.10.19 21:29:14.938 LOG: 5+5 calculated, result: 10.0
+08.10.19 21:29:14.938 LOG: ERROR: невозможно создать p9iugb
+08.10.19 21:29:14.938 LOG: calculator finished
+08.10.19 21:30:13.173 LOG: calculator started
+08.10.19 21:30:13.173 LOG: 4+4 calculated, result: 8.0
+08.10.19 21:30:13.173 LOG: ERROR: невозможно создать oyufvy
+08.10.19 21:30:13.173 LOG: calculator finished
+08.10.19 21:31:03.332 LOG: calculator started
+08.10.19 21:31:03.332 LOG: 5+5 calculated, result: 10.0
+08.10.19 21:31:03.332 LOG: ERROR: невозможно создать iuvgui
+08.10.19 21:31:03.332 LOG: calculator finished
+08.10.19 21:31:50.192 LOG: calculator started
+08.10.19 21:31:50.192 LOG: 5+5 calculated, result: 10.0
+08.10.19 21:31:50.192 LOG: ERROR: невозможно создать iuvb
+08.10.19 21:31:50.192 LOG: calculator finished
