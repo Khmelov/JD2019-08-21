@@ -23,12 +23,10 @@ abstract class Var implements Operation {
         if (strVar.matches(Patterns.SCALAR)) {
             factory = new ScalarFactory();
             return factory.createVar(strVar);
-        }
-        if (strVar.matches(Patterns.VECTOR)) {
+        } else if (strVar.matches(Patterns.VECTOR)) {
             factory = new VectorFactory();
             return factory.createVar(strVar);
-        }
-        if (strVar.matches(Patterns.MATRIX)) {
+        } else if (strVar.matches(Patterns.MATRIX)) {
             factory = new MatrixFactory();
             return factory.createVar(strVar);
         } else if (vars.containsKey(strVar))

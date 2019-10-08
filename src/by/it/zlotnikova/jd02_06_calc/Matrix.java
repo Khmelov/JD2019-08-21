@@ -16,9 +16,9 @@ class Matrix extends Var {
         this.value = matrix.value;
     }
 
-//    Matrix(String strMatrix) {
-//        this.value = stringToMatrix(strMatrix);
-//    }
+    Matrix(String strMatrix) {
+        this.value = stringToMatrix(strMatrix);
+    }
 
     private double[][] stringToMatrix(String str) {
 

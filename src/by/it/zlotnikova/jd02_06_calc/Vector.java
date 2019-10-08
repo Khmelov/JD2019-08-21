@@ -18,20 +18,20 @@ class Vector extends Var {
         this.value = vector.value;
     }
 
-//    private Vector(String strVector) {
-//        this.value = stringToVector(strVector);
-//    }
+    public Vector(String strVector) {
+        this.value = stringToVector(strVector);
+    }
 
-//    private static double[] stringToVector(String str) {
-//        str = str.replaceAll("[^-0-9\\.]+", " ");
-//        str = str.trim();
-//        String[] strArray = str.split(" ");
-//        double[] result = new double[strArray.length];
-//        for (int i = 0; i < strArray.length; i++) {
-//            result[i] = Double.parseDouble(strArray[i]);
-//        }
-//        return result;
-//    }
+    private static double[] stringToVector(String str) {
+        str = str.replaceAll("[^-0-9\\.]+", " ");
+        str = str.trim();
+        String[] strArray = str.split(" ");
+        double[] result = new double[strArray.length];
+        for (int i = 0; i < strArray.length; i++) {
+            result[i] = Double.parseDouble(strArray[i]);
+        }
+        return result;
+    }
 
     @Override
     public String toString() {

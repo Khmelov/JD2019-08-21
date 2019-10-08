@@ -50,14 +50,14 @@ class Logger {
         }
     }
 
-    private String getDate() {
+    static String getDate() {
         Instant now = Instant.now();
         Date date = Date.from(now);
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
         return dateFormat.format(date);
     }
 
-    private String getTime() {
+    static String getTime() {
         LocalTime localTime = LocalTime.now();
         return localTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
