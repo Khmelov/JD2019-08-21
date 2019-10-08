@@ -1,0 +1,5 @@
+message.welcome=Hi!
+message.question=How do you do?
+message.suggestion=Enter the type of locale(en, ru, be, end-exit):
+user.firstname=Yuri
+user.lastname=Akhrem

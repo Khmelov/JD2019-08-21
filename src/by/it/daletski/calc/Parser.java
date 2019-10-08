@@ -1,10 +1,17 @@
 package by.it.daletski.calc;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+
     Var calc(String expression)throws CalcException {
+
+        List<String> operands= new ArrayList<> ();
+
 
         String[] operand=expression.split (Patterns.OPERATION);
 

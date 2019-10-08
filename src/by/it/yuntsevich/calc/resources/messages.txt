@@ -1,0 +1,6 @@
+message.operation= unknown operation:
+message.division= division by zero
+message.file= not written in file:
+message.creation= impossible to create:
+message.operationimpossible= operation impossible:
+message.error= ERROR:

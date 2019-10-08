@@ -1,0 +1,11 @@
+CalcException.Error=ERROR:
+Matrix.ErrCannotAdd=Unavailable addition for Matrix
+Matrix.ErrNotEqualSize=The size of matrix is not equal
+Matrix.ErrCannotSubtraction=Unavailable subtraction for Matrix
+Matrix.ErrCannotMultiplication=Unavailable multiplication for Matrix
+Parser.ErrUnknownOperation=unknown operation:
+Var.ErrCannotCreate=Unavailable to create
+Var.ErrOperation=Operation
+Var.ErrUnavailable=unavailable
+Vector.ErrNotEqualSize=The sizes of vectors is not equal
+Vector.ErrUnavailableOperation=Unavailable operation for Vector

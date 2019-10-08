@@ -1,0 +1,5 @@
+message.welcome=Прывитанне!
+message.question=Як справы?
+message.suggestion=Увядзице цип лакали(en, ru, be, end-выхад):
+user.firstname=Юрый
+user.lastname=Ахрэм

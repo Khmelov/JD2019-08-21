@@ -5,35 +5,41 @@ import java.util.Scanner;
 public class TaskB {
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner (System.in);
-        int numberOfPerson = sc.nextInt ();
-        String[] name = new String[numberOfPerson];
-        for (int i = 0; i < numberOfPerson; i++) {
-            name[i] = sc.next ();
+        System.out.println ("Введите количество человек: ");
+        int countPerson = sc.nextInt ();
+        System.out.println ("Введите фамилии " + countPerson + " человек");
+        String numberOfPerson = sc.nextLine ();
+        String[] nameArr = new String[countPerson];
 
-        }
-
-        int arr[][] = new int[numberOfPerson][4];
-        for (int i = 0; i < numberOfPerson; i++) {
-            System.out.println ("Введите зарплату для " + name[i]);
-            for (int j = 0; j < 4; j++) {
-                if (!sc.hasNext ()) break;
-                arr[i][j] = Integer.parseInt (sc.next ());
+        for (int i = 0; i < countPerson; i++)
+            nameArr[i] = sc.nextLine ();
+        int arr[][] = new int[countPerson][4];
+        for (int i = 0; i < countPerson; i++) {
+            System.out.println ("Введите зарплату по кварталам для " + nameArr[i]);
+            for (int j = 0; j < arr[i].length; j++) {
+                arr[i][j] = sc.nextInt ();
             }
         }
 
-        for (int i = 0; i < numberOfPerson; i++)
-            for (int j = 0; j < 4; j++) {
-                System.out.println ("[" + i + "," + j + "] = " + arr[i][j]);
-
+        System.out.printf ("%-15s%-10s%-10s%-10s%-10s%-10s%n", "Фамилия", "Квартал 1", "Квартал 2", "Квартал 3", "Квартал 4", "Итого: ");
+        System.out.println ("-----------------------------------------------------------------");
+        int sumWage = 0, avg = 0, count = 0, sum = 0;
+        for (int i = 0; i < countPerson; i++) {
+            System.out.printf ("%-15s", nameArr[i]);
+            for (int j = 0; j < arr[i].length; j++) {
+                sum += arr[i][j];
+                avg += arr[i][j];
+                count++;
+                System.out.printf ("%10d", arr[i][j]);
             }
-
-
-
-
-
+            System.out.printf ("%-10d", sum);
+            sumWage += sum;
+        }
+        System.out.println ("-----------------------------------------------------------------");
+        System.out.printf ("%-15s%-10d%n", "Итого", sumWage);
+        System.out.printf ("%-15s%-10.4f%n", "Средняя:", (count > 0) ? ((double) avg / count) : 0);
     }
-
-
 }
+
+

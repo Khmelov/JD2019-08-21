@@ -12,29 +12,25 @@ public class TaskC {
 
         File directory = new File(path);
         try (PrintWriter out = new PrintWriter(new FileWriter(filetxt))) {
-            printFilesAndDirectories(directory, out);
+            tree(directory, out);
         } catch (IOException e) {
             System.err.println("Error write " + filetxt);
         }
     }
 
-    private static void printFilesAndDirectories(File fileName, PrintWriter out){
-        if (fileName.isDirectory()) {
-            System.out.println("dir:" + fileName.getName());
-            out.print("dir:" + fileName.getName()+"\n");
-            File [] files = fileName.listFiles();
-            for(File element: files) {
-                if (element.isDirectory())
-                    printFilesAndDirectories(element.getAbsoluteFile(), out);
-                else {
-                    System.out.println("file:" + element.getName());
-                    out.print("file:" + element.getName()+"\n");
-                }
+    private static void tree(File file, PrintWriter out) {
+
+        File[] files = file.listFiles();
+        assert files != null;
+        for (File fileRek : files) {
+            if (fileRek.isFile()) {
+                out.println("file:" + fileRek.getName());
+                System.out.println("file:" + fileRek.getName());
+            } else if (fileRek.isDirectory()) {
+                out.println("dir:" + fileRek.getName());
+                System.out.println("dir:" + fileRek.getName());
+                tree(fileRek, out);
             }
-        }
-        else {
-            System.out.println("file:" + fileName.getName());
-            out.print("file:" + fileName.getName()+"\n");
         }
     }
 

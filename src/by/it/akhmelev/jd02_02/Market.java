@@ -1,7 +1,6 @@
 package by.it.akhmelev.jd02_02;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Market {
 
