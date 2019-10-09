@@ -15,7 +15,7 @@ public enum ResourceManager {
         setLocale(Locale.getDefault());
         resourceBundle=ResourceBundle.getBundle(baseName,locale);
     }
-    void setLocale(Locale locale){
+    public void setLocale(Locale locale){
         this.locale=locale;
         resourceBundle=ResourceBundle.getBundle(baseName,locale);
 
