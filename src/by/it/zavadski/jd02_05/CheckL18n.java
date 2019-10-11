@@ -35,7 +35,7 @@ public class CheckL18n {
                 String country = params[1];
                 if (!(lang.equals("ru")|lang.equals("be")|lang.equals("en")))
                 {
-                    System.out.println(resourceManager.get(Errors.incorrectLanguage));
+                    System.out.println(resourceManager.get(Errors.INCORRECT_LANGUAGE));
                     continue;
                 }
                 else {
@@ -43,7 +43,7 @@ public class CheckL18n {
                 resourceManager.setLocale(locale);
                 dateFormat=DateFormat.getDateInstance(DateFormat.MEDIUM,locale);
             } }else {
-                throw new IOException(resourceManager.get(Errors.incorrectCommand));
+                throw new IOException(resourceManager.get(Errors.INCORRECT_COMMAND));
             }
             printStrings(resourceManager);
         }

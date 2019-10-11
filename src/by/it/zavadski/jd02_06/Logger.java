@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
+
 public class Logger {
     private static String filename="jd02_06_log.txt";
     private static String path=PathGenerator.filesPlace(Logger.class);
@@ -34,7 +35,7 @@ public class Logger {
         return localLogger;
     }
 
-    static void log(String message){
+    public static void log(String message){
         try(PrintWriter printWriter=new PrintWriter(new FileWriter(fullPath,true))){
             DateFormat dateFormat=new SimpleDateFormat("HH:mm:ss dd MMM yyyy");
             printWriter.printf("%s\t%s\n",dateFormat.format(new Date()),message);
