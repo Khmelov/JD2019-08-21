@@ -1,0 +1,5 @@
+Exception for logger from Thread №5
+Exception for logger from Thread №1
+Exception for logger from Thread №3
+Exception for logger from Thread №2
+Exception for logger from Thread №4
