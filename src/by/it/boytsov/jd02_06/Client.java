@@ -1,5 +1,7 @@
 package by.it.boytsov.jd02_06;
 
+import java.util.logging.Logger;
+
 public class Client
 {
     public static void main(String[] args)
