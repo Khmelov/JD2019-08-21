@@ -1,6 +1,0 @@
-message.operation= невядомая аперацыя:
-message.division= дзяленне на нуль
-message.file= не запiсана у файл:
-message.creation= немагчыма стварыць:
-message.operationimpossible= аперацыя немагчымая:
-message.error= ПАМЫЛКА:

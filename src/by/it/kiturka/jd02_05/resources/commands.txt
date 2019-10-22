@@ -1,3 +1,0 @@
-command.russian="ru"
-command.english="en"
-command.belarusian="be"
