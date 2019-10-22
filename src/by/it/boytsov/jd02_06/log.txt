@@ -1,6 +1,0 @@
-Main thread
-I am thread 0
-I am thread 4
-I am thread 3
-I am thread 2
-I am thread 1
